@@ -10,7 +10,9 @@
 		readable, tho.
 	</p>
 
-	<div class="p-6 bg-slate-200 dark:bg-neutral-800 my-2 rounded-xl">
+	<div
+		class="p-6 bg-slate-200 dark:bg-neutral-800 my-2 rounded-xl sticky top-0 shadow-lg"
+	>
 		<div class="flex flex-col gap-2">
 			<h2 class="text-gray-800 dark:text-gray-400 text-md font-medium">
 				Preview
@@ -113,18 +115,18 @@
 			</tab-list>
 			<tab-panels>
 				<color-selection-panel
+					@button-click="(item) => declarePrideFunc(item)"
 					:items="prideMCColors"
-					@button-click="(item) => declarePrideFunc(item)"
 					:color-map="colorMap"
 				/>
 				<color-selection-panel
+					@button-click="(item) => declarePrideFunc(item)"
 					:items="prideColors"
-					@button-click="(item) => declarePrideFunc(item)"
 					:color-map="colorMap"
 				/>
 				<color-selection-panel
-					:items="gradients"
 					@button-click="(item) => declarePrideFunc(item)"
+					:items="gradients"
 					:color-map="colorMap"
 					:gradient="true"
 				/>
@@ -140,8 +142,8 @@
 			<input
 				type="text"
 				class="mt-0 block w-full px-0.5 border-0 border-b-2 border-black dark:border-gray-200 focus:ring-0 focus:border-pink- dark:focus:border-pink-600 dark:bg-neutral-800 transition-all dark:text-white"
-				v-model="macro"
-				@input.prevent="handleNickRepeat()"
+				:value="macro"
+				@input="(event) => updateMacro(event)"
 			/>
 
 			<div class="flex flex-row gap-2 mt-2">
@@ -326,7 +328,7 @@ const handleNickRepeat = () => {
 		return false;
 	}
 
-	input.value = input.value.replace(/&([A-Fr0-9]|#[0-9A-F]{6})/gi, "");
+	const filter = input.value.replace(/&([A-Fr0-9]|#[0-9A-F]{6})/gi, "");
 
 	const nickLen = input.value.length;
 	const macroLen = macro.value.length;
@@ -343,7 +345,7 @@ const handleNickRepeat = () => {
 						(index % macroLen) + 8
 					) +
 					"" +
-					input.value.slice(index, index + 1);
+					filter.slice(index, index + 1);
 
 				console.log(out);
 			}
@@ -356,15 +358,15 @@ const handleNickRepeat = () => {
 						(index % macroLen) + 1
 					) +
 					"" +
-					input.value.slice(index, index + 1);
+					filter.slice(index, index + 1);
 			}
 		}
 	} else if (!repeat.value) {
-		let sections = input.value.length / macro.value.length;
-		let stages = input.value.length / sections;
+		let sections = filter.length / macro.value.length;
+		let stages = filter.length / sections;
 
 		for (let index = 0; index < stages; index++) {
-			out += `&${macro.value[index]}${input.value.slice(
+			out += `&${macro.value[index]}${filter.slice(
 				Math.floor(sections * index),
 				Math.floor(sections * (index + 1))
 			)}`;
@@ -379,6 +381,17 @@ const handleNickRepeat = () => {
 
 const updateNickRepeat = (val: boolean) => {
 	repeat.value = val;
+	handleNickRepeat();
+};
+
+const updateMacro = (event: Event) => {
+	macro.value =
+		event.target &&
+		"value" in event.target &&
+		typeof event.target.value === "string"
+			? event.target.value
+			: "";
+
 	handleNickRepeat();
 };
 
