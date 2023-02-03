@@ -142,7 +142,7 @@
 			<input
 				type="text"
 				class="mt-0 block w-full px-0.5 border-0 border-b-2 border-black dark:border-gray-200 focus:ring-0 focus:border-pink- dark:focus:border-pink-600 dark:bg-neutral-800 transition-all dark:text-white"
-				:value="macro"
+				v-model="macro"
 				@input="(event) => updateMacro(event)"
 			/>
 
@@ -315,20 +315,10 @@ const declareColorFunc = (color: BlockMCColor) => {
 	};
 };
 
-function hexCheck(str: string) {
-	if (str.match(/#/g)) {
-		return false;
-	} else {
-		return true;
-	}
-}
-
 const handleNickRepeat = () => {
-	if (!hexCheck(macro.value) ?? !repeat.value) {
-		return false;
+	if (repeat.value === null ?? macro.value === "null") {
+		return;
 	}
-
-	const filter = input.value.replace(/&([A-Fr0-9]|#[0-9A-F]{6})/gi, "");
 
 	const nickLen = input.value.length;
 	const macroLen = macro.value.length;
@@ -345,7 +335,7 @@ const handleNickRepeat = () => {
 						(index % macroLen) + 8
 					) +
 					"" +
-					filter.slice(index, index + 1);
+					input.value.slice(index, index + 1);
 
 				console.log(out);
 			}
@@ -358,18 +348,24 @@ const handleNickRepeat = () => {
 						(index % macroLen) + 1
 					) +
 					"" +
-					filter.slice(index, index + 1);
+					input.value.slice(index, index + 1);
 			}
 		}
 	} else if (!repeat.value) {
-		let sections = filter.length / macro.value.length;
-		let stages = filter.length / sections;
+		const filter = input.value.replace(/&([A-Fr0-9]|#[0-9A-F]{6})/gi, "");
+		const hexCodes = macro.value.slice(1).split("#");
+		let sections = input.value.length / macro.value.length;
+		let stages = input.value.length / sections;
 
 		for (let index = 0; index < stages; index++) {
-			out += `&${macro.value[index]}${filter.slice(
-				Math.floor(sections * index),
-				Math.floor(sections * (index + 1))
-			)}`;
+			let final = index;
+
+			// calculate when we will HIT the end of the stage.
+			while (hexCodes[final] !== hexCodes[index]) {
+				final++;
+			}
+
+			out += `&#${hexCodes[index]}${filter.slice(index + 1, final - 1)}`;
 		}
 
 		input.value = out;
@@ -385,13 +381,6 @@ const updateNickRepeat = (val: boolean) => {
 };
 
 const updateMacro = (event: Event) => {
-	macro.value =
-		event.target &&
-		"value" in event.target &&
-		typeof event.target.value === "string"
-			? event.target.value
-			: "";
-
 	handleNickRepeat();
 };
 

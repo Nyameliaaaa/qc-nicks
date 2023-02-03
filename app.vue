@@ -7,7 +7,9 @@
 		<Head>
 			<Title>QC Nicks Helper</Title>
 		</Head>
-		<Body class="bg-slate-100 dark:bg-neutral-900 font-sans">
+		<Body
+			class="bg-slate-100 dark:bg-neutral-900 font-sans overflow-x-clip"
+		>
 			<div class="max-w-5xl mx-auto p-2">
 				<nuxt-page />
 			</div>
