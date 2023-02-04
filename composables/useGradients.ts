@@ -5,35 +5,35 @@ export default function (): PrideColor[] {
 	return [
 		{
 			name: "Asexual",
-			code: ["#810081", "#FFFFFF", "#A4A4A4", "#000000"],
+			colors: ["#810081", "#FFFFFF", "#A4A4A4", "#000000"],
 		},
 		{
 			name: "Bisexual",
-			code: ["#D60270", "#9B4F96", "#0038A8"],
+			colors: ["#D60270", "#9B4F96", "#0038A8"],
 		},
 		{
 			name: "Genderqueer",
-			code: ["#B77FDD", "#FFFFFF", "#48821E"],
+			colors: ["#B77FDD", "#FFFFFF", "#48821E"],
 		},
 		{
 			name: "Lesbian",
-			code: ["#D62900", "#FFFFFF", "#A50062"],
+			colors: ["#D62900", "#FFFFFF", "#A50062"],
 		},
 		{
 			name: "Omnisexual",
-			code: ["#ff9ccd", "#ff53bd", "#270046", "#675ffe", "#8ca7ff"],
+			colors: ["#ff9ccd", "#ff53bd", "#270046", "#675ffe", "#8ca7ff"],
 		},
 		{
 			name: "Non-Binary",
-			code: ["#FFF430", "#FFFFFF", "#9C59D1", "#000000"],
+			colors: ["#FFF430", "#FFFFFF", "#9C59D1", "#000000"],
 		},
 		{
 			name: "Pansexual",
-			code: ["#FF1B8D", "#FFDA00", "#1BB3FF"],
+			colors: ["#FF1B8D", "#FFDA00", "#1BB3FF"],
 		},
 		{
 			name: "Rainbow",
-			code: [
+			colors: [
 				"#FF0018",
 				"#FFA52C",
 				"#FFFF41",
@@ -44,15 +44,15 @@ export default function (): PrideColor[] {
 		},
 		{
 			name: "Pastel Pride",
-			code: ["#FF9B9B", "#FFFF9B", "#9BFF9B", "#9BFFFF", "#9B9BFF"],
+			colors: ["#FF9B9B", "#FFFF9B", "#9BFF9B", "#9BFFFF", "#9B9BFF"],
 		},
 		{
 			name: "Trans",
-			code: ["#55CDFC", "#FFFFFF", "#F7A8B8"],
+			colors: ["#55CDFC", "#FFFFFF", "#F7A8B8"],
 		},
 		{
 			name: "Trans",
-			code: ["#55CDFC", "#F7A8B8", "#FFFFFF", "#F7A8B8", "#55CDFC"],
+			colors: ["#55CDFC", "#F7A8B8", "#FFFFFF", "#F7A8B8", "#55CDFC"],
 		},
 	];
 }

@@ -1,165 +1,165 @@
-import { PrideMCColor } from "~~/utils/types";
+import { PrideColor } from "~~/utils/types";
 
-export default function (): PrideMCColor[] {
+export default function (): PrideColor[] {
 	return [
 		{
 			name: "Achillean",
-			code: "bfafb",
+			colors: ["b", "f", "a", "f", "b"],
 			repeat: false,
 		},
 		{
 			name: "Agender",
-			code: "87faf78",
+			colors: ["8", "7", "f", "a", "f", "7", "8"],
 			repeat: false,
 		},
 		{
 			name: "Aromantic",
-			code: "2af78",
+			colors: ["2", "a", "f", "7", "8"],
 			repeat: false,
 		},
 		{
 			name: "Asexual",
-			code: "87f5",
+			colors: ["8", "7", "f", "5"],
 			repeat: false,
 		},
 		{
 			name: "Bisexual",
-			code: "d59",
+			colors: ["d", "5", "9"],
 			repeat: false,
 		},
 		{
 			name: "Cenrell",
-			code: "19fa2",
+			colors: ["1", "9", "f", "a", "2"],
 			repeat: false,
 		},
 		{
 			name: "Demiboy",
-			code: "87bfb78",
+			colors: ["8", "7", "b", "f", "b", "7", "8"],
 			repeat: false,
 		},
 		{
 			name: "Demigender",
-			code: "87efe78",
+			colors: ["8", "7", "e", "f", "e", "7", "8"],
 			repeat: false,
 		},
 		{
 			name: "Demigenderflux",
-			code: "875efe578",
+			colors: ["8", "7", "5", "e", "f", "e", "5", "7", "8"],
 			repeat: false,
 		},
 		{
 			name: "Demigirl",
-			code: "87dfd78",
+			colors: ["8", "7", "d", "f", "d", "7", "8"],
 			repeat: false,
 		},
 		{
 			name: "Diamoric",
-			code: "af5fa",
+			colors: ["a", "f", "5", "f", "a"],
 			repeat: false,
 		},
 		{
 			name: "Faesari",
-			code: "5dbfd51",
+			colors: ["5", "d", "b", "f", "d", "5", "1"],
 			repeat: false,
 		},
 		{
 			name: "Genderfae",
-			code: "2aefcd51",
+			colors: ["2", "a", "e", "f", "c", "d", "5", "1"],
 			repeat: false,
 		},
 		{
 			name: "Genderfaun",
-			code: "6eefb35",
+			colors: ["6", "e", "e", "f", "b", "3", "5"],
 			repeat: false,
 		},
 		{
 			name: "Genderfluid",
-			code: "df581",
+			colors: ["d", "f", "5", "8", "1"],
 			repeat: false,
 		},
 		{
 			name: "Genderflux",
-			code: "4c7b3e",
+			colors: ["4", "c", "7", "b", "3", "e"],
 			repeat: false,
 		},
 		{
 			name: "Genderqueer",
-			code: "5f2",
+			colors: ["5", "f", "2"],
 			repeat: false,
 		},
 		{
 			name: "Genderqueer",
-			code: "dfa",
+			colors: ["d", "f", "a"],
 			repeat: false,
 		},
 		{
 			name: "Intersex",
-			code: "5fbdf5",
+			colors: ["5", "f", "b", "d", "f", "5"],
 			repeat: false,
 		},
 		{
 			name: "Intersex",
-			code: "e5e5e",
+			colors: ["e", "5", "e", "5", "e"],
 			repeat: false,
 		},
 		{
 			name: "Lesbian",
-			code: "5dfc4",
+			colors: ["5", "d", "f", "c", "4"],
 			repeat: false,
 		},
 		{
 			name: "Non-Binary",
-			code: "85fe",
+			colors: ["8", "5", "f", "e"],
 			repeat: false,
 		},
 		{
 			name: "Omnisexual",
-			code: "d513b",
+			colors: ["d", "5", "1", "3", "b"],
 			repeat: false,
 		},
 		{
 			name: "Pansexual",
-			code: "deb",
+			colors: ["d", "e", "b"],
 			repeat: false,
 		},
 		{
 			name: "Queerplatonic",
-			code: "edf78",
+			colors: ["e", "d", "f", "7", "8"],
 			repeat: false,
 		},
 		{
 			name: "Rainbow",
-			code: "ceab9d",
+			colors: ["c", "e", "a", "b", "9", "d"],
 			repeat: false,
 		},
 		{
 			name: "Rainbow",
-			code: "46e235",
+			colors: ["4", "6", "e", "2", "3", "5"],
 			repeat: false,
 		},
 		{
 			name: "Sapphic",
-			code: "df5fd",
+			colors: ["d", "f", "5", "f", "d"],
 			repeat: false,
 		},
 		{
 			name: "Skoliosexual",
-			code: "2ef8",
+			colors: ["2", "e", "f", "8"],
 			repeat: false,
 		},
 		{
 			name: "Transgender",
-			code: "bdfdb",
+			colors: ["b", "d", "f", "d", "b"],
 			repeat: false,
 		},
 		{
 			name: "Transgender",
-			code: "3dfd3",
+			colors: ["3", "d", "f", "d", "3"],
 			repeat: false,
 		},
 		{
 			name: "Villain",
-			code: "85a6d8",
+			colors: ["8", "5", "a", "6", "d", "8"],
 			repeat: false,
 		},
 	];

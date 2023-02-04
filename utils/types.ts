@@ -1,20 +1,14 @@
-export interface PrideMCColor {
-	name: string;
-	code: string;
-	repeat?: boolean;
-}
-
 export interface PrideColor {
 	name: string;
-	code: string[];
+	colors: string[];
 	repeat?: boolean;
 }
 
 export interface BlockMCColor {
-	bg: string;
-	text: string;
-	code: string;
-	name: string;
+	backgroundColor: string;
+	textColor: string;
+	hexId: string;
+	colorName: string;
 }
 
 export interface OutputLexicalNode {

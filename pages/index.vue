@@ -17,10 +17,13 @@
 			<h2 class="text-gray-800 dark:text-gray-400 text-md font-medium">
 				Preview
 			</h2>
-			<p class="dark:text-white text-3xl font-bold text-center">
+			<p
+				class="dark:text-white text-3xl font-bold text-center py-2 rounded-md"
+				:class="`[background-image:_linear-gradient(#131a1b,#131a1b),_url('/assets/img/blank_sign.png')] [background-blend-mode:_hard-light]`"
+			>
 				<span
-					v-for="section in output"
-					:style="`color: ${section.color}`"
+					v-for="section in preview"
+					:style="`color: ${section.color};text-shadow: 4px 4px 0 #002929; font-family: Minecraft;`"
 				>
 					{{ section.text }}
 				</span>
@@ -36,7 +39,7 @@
 			<input
 				type="text"
 				class="mt-0 block w-full px-0.5 border-0 border-b-2 border-black dark:border-gray-200 focus:ring-0 focus:border-pink- dark:focus:border-pink-600 dark:bg-neutral-800 transition-all dark:text-white"
-				v-model="input"
+				v-model="nick"
 				@input.prevent="updateNick"
 			/>
 
@@ -47,7 +50,7 @@
 					Command
 				</h2>
 				<code class="dark:text-white text-xl font-bold text-center">
-					/nick {{ input }}
+					/nick {{ nick }}
 				</code>
 				<button @click="">
 					<Icon
@@ -69,13 +72,13 @@
 		<div class="grid grid-cols-4 md:grid-cols-6">
 			<button
 				v-for="color in blockMCColors"
-				:key="color.name"
-				:style="`background-color: ${color.bg}; color: ${color.text}`"
+				:key="color.colorName"
+				:style="`background-color: ${color.backgroundColor}; color: ${color.textColor}`"
 				class="p-2 rounded-md m-2"
-				@click.prevent="(event) => declareColorFunc(color)()"
+				@click.prevent="(event) => declareColorFunc(color)"
 			>
-				<p class="font-semibold">{{ color.name }}</p>
-				<p>&{{ color.code }}</p>
+				<p class="font-semibold">{{ color.colorName }}</p>
+				<p>&{{ color.hexId }}</p>
 			</button>
 		</div>
 
@@ -115,17 +118,17 @@
 			</tab-list>
 			<tab-panels>
 				<color-selection-panel
-					@button-click="(item) => declarePrideFunc(item)"
+					@button-click="createPrideApplicator"
 					:items="prideMCColors"
 					:color-map="colorMap"
 				/>
 				<color-selection-panel
-					@button-click="(item) => declarePrideFunc(item)"
+					@button-click="createPrideApplicator"
 					:items="prideColors"
 					:color-map="colorMap"
 				/>
 				<color-selection-panel
-					@button-click="(item) => declarePrideFunc(item)"
+					@button-click="(item) => null"
 					:items="gradients"
 					:color-map="colorMap"
 					:gradient="true"
@@ -135,37 +138,49 @@
 	</div>
 
 	<div class="p-6 bg-slate-200 dark:bg-neutral-800 my-2 rounded-xl">
-		<label class="block">
-			<h2 class="text-gray-800 dark:text-gray-400 text-md font-medium">
-				Macro
-			</h2>
-			<input
-				type="text"
-				class="mt-0 block w-full px-0.5 border-0 border-b-2 border-black dark:border-gray-200 focus:ring-0 focus:border-pink- dark:focus:border-pink-600 dark:bg-neutral-800 transition-all dark:text-white"
-				v-model="macro"
-				@input="(event) => updateMacro(event)"
-			/>
-
-			<div class="flex flex-row gap-2 mt-2">
-				<Switch
-					v-model="repeat"
-					@update:model-value="(val) => updateNickRepeat(val)"
-					:class="repeat ? 'bg-pink-600' : 'bg-slate-700'"
-					class="relative inline-flex h-6 w-11 items-center rounded-full"
+		<form @submit.prevent="(event) => handleMacro()">
+			<label class="block">
+				<h2
+					class="text-gray-800 dark:text-gray-400 text-md font-medium"
 				>
-					<span class="sr-only"
-						>Repeat (Will not work with hex codes)</span
-					>
-					<span
-						:class="repeat ? 'translate-x-6' : 'translate-x-1'"
-						class="inline-block h-4 w-4 transform rounded-full bg-white transition"
+					Macro
+				</h2>
+
+				<div class="flex flex-row justify-between items-center gap-4">
+					<input
+						type="text"
+						class="mt-0 block flex-1 px-0.5 border-0 border-b-2 border-black dark:border-gray-200 focus:ring-0 focus:border-pink- dark:focus:border-pink-600 dark:bg-neutral-800 transition-all dark:text-white"
+						v-model="macro"
 					/>
-				</Switch>
-				<p class="text-md font-semibold dark:text-white">
-					Repeat (Will not work with hex codes)
-				</p>
-			</div>
-		</label>
+					<div>
+						<input
+							type="submit"
+							value="Apply"
+							class="text-white font-semibold hover:font-bold transition-all cursor-pointer bg-slate-200 p-2 rounded-md dark:bg-neutral-700"
+						/>
+					</div>
+				</div>
+				<div class="flex flex-row gap-2 mt-2">
+					<Switch
+						v-model="repeat"
+						@update:model-value="null"
+						:class="repeat ? 'bg-pink-600' : 'bg-slate-700'"
+						class="relative inline-flex h-6 w-11 items-center rounded-full"
+					>
+						<span class="sr-only"
+							>Repeat (Will not work with hex codes)</span
+						>
+						<span
+							:class="repeat ? 'translate-x-6' : 'translate-x-1'"
+							class="inline-block h-4 w-4 transform rounded-full bg-white transition"
+						/>
+					</Switch>
+					<p class="text-md font-semibold dark:text-white">
+						Repeat (Will not work with hex codes)
+					</p>
+				</div>
+			</label>
+		</form>
 	</div>
 
 	<div class="p-6 bg-slate-200 dark:bg-neutral-800 my-2 rounded-xl">
@@ -179,7 +194,7 @@
 			<h2 class="text-gray-800 dark:text-gray-400 text-md font-medium">
 				Save your Nickname
 			</h2>
-			<button class="flex flex-row gap-2 group" @click="saveNick">
+			<button class="flex flex-row gap-2 group">
 				<p
 					class="dark:text-white text-md group-hover:text-pink-500 transition-all"
 				>
@@ -206,12 +221,7 @@
 
 <script setup lang="ts">
 import { TabGroup, TabList, Tab, TabPanels, Switch } from "@headlessui/vue";
-import {
-	BlockMCColor,
-	OutputLexicalNode,
-	PrideColor,
-	PrideMCColor,
-} from "~~/utils/types";
+import { BlockMCColor, OutputLexicalNode, PrideColor } from "~~/utils/types";
 
 // Constants
 const blockMCColors = useBlockMCColors();
@@ -220,28 +230,28 @@ const prideColors = usePrideColors();
 const gradients = useGradients();
 
 const colorMap: Record<string, string> = {};
-blockMCColors.map((color) => (colorMap[color.code] = color.bg));
+blockMCColors.map((color) => (colorMap[color.hexId] = color.backgroundColor));
 
 // State
-const input = useState("input", () => {
+const nick = useState("input", () => {
 	return "Queercraft";
 });
 
-const output = useState<OutputLexicalNode[]>("output", () => [
-	{ color: colorMap["f"], text: input.value },
+const preview = useState<OutputLexicalNode[]>("output", () => [
+	{ color: colorMap["f"], text: nick.value },
 ]);
 
 const status = useState("status", () => "");
 const id = useState<string | null | undefined>("id", () => null);
 
 const macro = useState("macro", () => "");
-const repeat = useState("repeat", () => true);
+const repeat = useState("repeat", () => false);
 
 // Handle the preview field.
 const showPreview = () => {
-	output.value = [];
+	preview.value = [];
 
-	const parse = input.value.split("");
+	const parse = nick.value.split("");
 	let index = 0;
 
 	while (index < parse.length) {
@@ -249,14 +259,14 @@ const showPreview = () => {
 
 		if (value === "&") {
 			if (parse[index + 1] === "#") {
-				output.value.push({
-					color: `${input.value.slice(index + 1, index + 8)}`,
+				preview.value.push({
+					color: `${nick.value.slice(index + 1, index + 8)}`,
 					text: "",
 				});
 
 				index += 8;
 			} else {
-				output.value.push({
+				preview.value.push({
 					color: `${colorMap[parse[index + 1]]}`,
 					text: "",
 				});
@@ -264,23 +274,23 @@ const showPreview = () => {
 				index += 2;
 			}
 		} else {
-			if (output.value.length === 0) {
-				output.value.push({
+			if (preview.value.length === 0) {
+				preview.value.push({
 					color: "",
 					text: "",
 				});
 			}
 
-			output.value[output.value.length - 1].text += value;
+			preview.value[preview.value.length - 1].text += value;
 			index++;
 		}
 	}
 };
 
 // Handles nick filtering.
-let updateNick = () => {
-	let filter = input.value.replace(/&([A-Fr0-9]|#[0-9A-F]{6})/gi, "");
-	let invalidCharCheck = input.value.match(/[^\w&#]/gi);
+const updateNick = () => {
+	let filter = nick.value.replace(/&([A-Fr0-9]|#[0-9A-F]{6})/gi, "");
+	let invalidCharCheck = nick.value.match(/[^\w&#]/gi);
 
 	if (filter.length > 20) {
 		status.value = "Nickname is too long.";
@@ -303,143 +313,58 @@ let updateNick = () => {
 
 // Handle color selection
 const declareColorFunc = (color: BlockMCColor) => {
-	return () => {
-		// clear selected colors
-		input.value = input.value.replace(/&([A-Fr0-9]|#[0-9A-F]{6})/gi, "");
+	// clear selected colors
+	nick.value = nick.value
+		.replaceAll(/&([A-Fr0-9]|#[0-9A-F]{6})/gi, "")
+		.replaceAll("&#", "");
 
-		input.value = `&${color.code}${
-			input.value.startsWith("&") ? input.value.slice(2) : input.value
-		}`;
+	nick.value = `&${color.hexId}${
+		nick.value.startsWith("&") ? nick.value.slice(2) : nick.value
+	}`;
 
-		showPreview();
-	};
+	showPreview();
 };
 
-const handleNickRepeat = () => {
-	if (repeat.value === null ?? macro.value === "null") {
-		return;
-	}
-
-	const nickLen = input.value.length;
-	const macroLen = macro.value.length;
+const handleMacro = () => {
+	nick.value = nick.value
+		.replaceAll(/&([A-Fr0-9]|#[0-9A-F]{6})/gi, "")
+		.replaceAll("&#", "");
 
 	let out = "";
+	const colorPattern = macro.value.includes("#")
+		? macro.value
+				.slice(1)
+				.split("#")
+				.map((color) => `#${color}`)
+		: macro.value.split("");
 
 	if (repeat.value) {
-		if (macro.value.includes("#")) {
-			for (let index = 0; index < nickLen; index++) {
-				out +=
-					"&" +
-					macro.value.slice(
-						(index % macroLen) + 1,
-						(index % macroLen) + 8
-					) +
-					"" +
-					input.value.slice(index, index + 1);
+		const inputChunk = useArraySplitting(nick.value.split(""), 2);
 
-				console.log(out);
-			}
-		} else {
-			for (let index = 0; index < nickLen; index++) {
-				out +=
-					"&" +
-					macro.value.slice(
-						index % macroLen,
-						(index % macroLen) + 1
-					) +
-					"" +
-					input.value.slice(index, index + 1);
-			}
+		out = inputChunk
+			.map(
+				(chunk, index) =>
+					`&${colorPattern[index % colorPattern.length]}${chunk}`
+			)
+			.join("");
+	} else {
+		let charAmount = nick.value.length / colorPattern.length;
+
+		for (let index = 0; index < colorPattern.length; index++) {
+			out += `&${colorPattern[index]}${nick.value.slice(
+				Math.floor(charAmount * index),
+				Math.floor(charAmount * (index + 1))
+			)}`;
 		}
-	} else if (!repeat.value) {
-		const filter = input.value.replace(/&([A-Fr0-9]|#[0-9A-F]{6})/gi, "");
-		const hexCodes = macro.value.slice(1).split("#");
-		let sections = input.value.length / macro.value.length;
-		let stages = input.value.length / sections;
-
-		for (let index = 0; index < stages; index++) {
-			let final = index;
-
-			// calculate when we will HIT the end of the stage.
-			while (hexCodes[final] !== hexCodes[index]) {
-				final++;
-			}
-
-			out += `&#${hexCodes[index]}${filter.slice(index + 1, final - 1)}`;
-		}
-
-		input.value = out;
 	}
 
-	input.value = out;
+	nick.value = out;
 	showPreview();
 };
 
-const updateNickRepeat = (val: boolean) => {
-	repeat.value = val;
-	handleNickRepeat();
-};
-
-const updateMacro = (event: Event) => {
-	handleNickRepeat();
-};
-
-const declarePrideFunc = ({
-	code,
-	repeat: colorRepeat,
-}: PrideMCColor | PrideColor) => {
-	// clear selected colors
-	input.value = input.value.replace(/&([A-Fr0-9]|#[0-9A-F]{6})/gi, "");
-	macro.value = code instanceof Array ? code.join("") : code;
-	repeat.value = colorRepeat ?? false;
-
-	let out = "";
-
-	if (repeat.value && !(code instanceof Array)) {
-		handleNickRepeat();
-		return;
-	}
-
-	var nickLen = input.value.length;
-	let colourLen = code.length;
-
-	if (nickLen === 0) {
-		return false;
-	}
-
-	if (nickLen > colourLen && !(code instanceof Array)) {
-		repeat.value = true;
-		handleNickRepeat();
-		return;
-	} else if (nickLen > 20) {
-		status.value = "Nickname is too long.";
-		return;
-	}
-
-	let colorCodeCharacterAmount = input.value.length / code.length;
-	let amountOfCharacters = input.value.length / colorCodeCharacterAmount;
-
-	for (let index = 0; index < amountOfCharacters; index++) {
-		out += `&${code[index]}${input.value.slice(
-			Math.floor(colorCodeCharacterAmount * index),
-			Math.floor(colorCodeCharacterAmount * (index + 1))
-		)}`;
-	}
-
-	input.value = out;
-	showPreview();
-};
-
-const saveNick = async () => {
-	const { data } = await useFetch<string>(
-		"https://qc-nick-saver.nightlake.workers.dev/nick",
-		{ method: "POST", body: input.value.toString() }
-	);
-
-	id.value = data.value;
-
-	setTimeout(() => {
-		id.value = null;
-	}, 1500);
+const createPrideApplicator = (item: PrideColor) => {
+	macro.value = item.colors.join("");
+	repeat.value = item.repeat ?? false;
+	handleMacro();
 };
 </script>

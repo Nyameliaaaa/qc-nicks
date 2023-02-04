@@ -4,13 +4,28 @@
 			<button
 				v-for="item in items"
 				:key="item.name"
-				class="p-2 rounded-md m-2"
 				@click="$emit('button-click', item)"
-				:style="generateStyle(gradient ?? false, item)"
+				:class="gradient ? `p-4` : `p-2`"
+				:style="`background: ${
+					gradient && item.colors instanceof Array
+						? `linear-gradient(90deg, ${item.colors.map(
+								(color) => `${color},`
+						  )})`
+						: ''
+				};`"
+				class="rounded-md m-2"
 			>
+				<!-- :style="{
+					background:
+						gradient && item.code instanceof Array
+							? `linear-gradient(90deg, ${item.code.map(
+									(color) => `${color},`
+							  )})`
+							: '',
+				}" -->
 				<p v-if="!gradient">
 					<span
-						v-for="color in item.code"
+						v-for="color in item.colors"
 						:style="`color: ${colorMap[color] ?? color}`"
 						class="text-lg"
 						>█</span
@@ -26,27 +41,27 @@
 
 <script setup lang="ts">
 import { TabPanel } from "@headlessui/vue";
-import { PrideColor, PrideMCColor } from "~~/utils/types";
+import { PrideColor } from "~~/utils/types";
 
 defineProps<{
-	items: PrideColor[] | PrideMCColor[];
+	items: PrideColor[];
 	colorMap: Record<string, string>;
 	gradient?: boolean;
 }>();
 
 defineEmits<{
-	(event: "button-click", item: PrideColor | PrideMCColor): void;
+	(event: "button-click", item: PrideColor): void;
 }>();
 
-const generateStyle = (gradient: boolean, item: PrideColor | PrideMCColor) => {
-	if (gradient && item.code instanceof Array) {
+const generateStyle = (gradient: boolean, item: PrideColor) => {
+	if (gradient && item.colors instanceof Array) {
 		return {
-			backgroundImage: `linear-gradient(90deg, ${item.code.map(
+			"background-image": `linear-gradient(90deg, ${item.colors.map(
 				(color) => `${color},`
 			)})`,
 		};
 	} else {
-		return {};
+		return;
 	}
 };
 </script>
