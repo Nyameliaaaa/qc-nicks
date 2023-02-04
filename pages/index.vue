@@ -163,7 +163,7 @@
 				<div class="flex flex-row gap-2 mt-2">
 					<Switch
 						v-model="repeat"
-						@update:model-value="null"
+						@update:model-value="handleMacro"
 						:class="repeat ? 'bg-pink-600' : 'bg-slate-700'"
 						class="relative inline-flex h-6 w-11 items-center rounded-full"
 					>
