@@ -11,14 +11,14 @@
 	</p>
 
 	<div
-		class="p-6 bg-slate-200 dark:bg-neutral-800 my-2 rounded-xl sticky top-0 shadow-lg"
+		class="p-6 bg-slate-200 dark:bg-neutral-800 my-2 rounded-xl sticky top-0 shadow-lg z-50"
 	>
 		<div class="flex flex-col gap-2">
 			<h2 class="text-gray-800 dark:text-gray-400 text-md font-medium">
 				Preview
 			</h2>
 			<p
-				class="dark:text-white text-3xl font-bold text-center py-2 rounded-md"
+				class="text-white text-3xl font-bold text-center py-2 rounded-md"
 				:class="`[background-image:_linear-gradient(#131a1b,#131a1b),_url('/assets/img/blank_sign.png')] [background-blend-mode:_hard-light]`"
 			>
 				<span
@@ -84,7 +84,7 @@
 
 		<label class="block">
 			<h2 class="text-gray-800 dark:text-gray-400 text-md font-medium">
-				Or add your own?
+				Or add your own? [unfinished]
 			</h2>
 		</label>
 	</div>
@@ -128,7 +128,7 @@
 					:color-map="colorMap"
 				/>
 				<color-selection-panel
-					@button-click="(item) => null"
+					@button-click="createGradientApplicator"
 					:items="gradients"
 					:color-map="colorMap"
 					:gradient="true"
@@ -138,7 +138,7 @@
 	</div>
 
 	<div class="p-6 bg-slate-200 dark:bg-neutral-800 my-2 rounded-xl">
-		<form @submit.prevent="(event) => handleMacro()">
+		<form @submit.prevent="handleMacro">
 			<label class="block">
 				<h2
 					class="text-gray-800 dark:text-gray-400 text-md font-medium"
@@ -167,17 +167,13 @@
 						:class="repeat ? 'bg-pink-600' : 'bg-slate-700'"
 						class="relative inline-flex h-6 w-11 items-center rounded-full"
 					>
-						<span class="sr-only"
-							>Repeat (Will not work with hex codes)</span
-						>
+						<span class="sr-only">Repeat</span>
 						<span
 							:class="repeat ? 'translate-x-6' : 'translate-x-1'"
 							class="inline-block h-4 w-4 transform rounded-full bg-white transition"
 						/>
 					</Switch>
-					<p class="text-md font-semibold dark:text-white">
-						Repeat (Will not work with hex codes)
-					</p>
+					<p class="text-md font-semibold dark:text-white">Repeat</p>
 				</div>
 			</label>
 		</form>
@@ -185,14 +181,14 @@
 
 	<div class="p-6 bg-slate-200 dark:bg-neutral-800 my-2 rounded-xl">
 		<h2 class="text-gray-800 dark:text-gray-400 text-md font-medium">
-			Custom Gradients (coming soon)
+			Custom Gradients [unfinished]
 		</h2>
 	</div>
 
 	<div class="p-6 bg-slate-200 dark:bg-neutral-800 my-2 rounded-xl">
 		<div class="flex flex-row justify-between">
 			<h2 class="text-gray-800 dark:text-gray-400 text-md font-medium">
-				Save your Nickname
+				Save your Nickname [unfinished]
 			</h2>
 			<button class="flex flex-row gap-2 group">
 				<p
@@ -246,6 +242,7 @@ const id = useState<string | null | undefined>("id", () => null);
 
 const macro = useState("macro", () => "");
 const repeat = useState("repeat", () => false);
+const color = useState("color", () => "#ffffff");
 
 // Handle the preview field.
 const showPreview = () => {
@@ -366,5 +363,107 @@ const createPrideApplicator = (item: PrideColor) => {
 	macro.value = item.colors.join("");
 	repeat.value = item.repeat ?? false;
 	handleMacro();
+};
+
+const hexToRgb = (hex: string) => {
+	var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+	return result
+		? [
+				parseInt(result[1], 16),
+				parseInt(result[2], 16),
+				parseInt(result[3], 16),
+		  ]
+		: [];
+};
+
+const updateColor = (event: any) => {
+	color.value = event.cssColor;
+	nick.value = nick.value
+		.replaceAll(/&([A-Fr0-9]|#[0-9A-F]{6})/gi, "")
+		.replaceAll("&#", "");
+
+	console.log(color.value);
+	nick.value = `&${color.value}${nick.value}`;
+	showPreview();
+};
+
+// thanks to sarah and xenni for this masterpiece
+const calculateGradientColor = (
+	workingText: string,
+	startColor: string,
+	endColor: string
+) => {
+	workingText = workingText.replace(/&([0-9a-f]|#[0-9a-f]{6})/gi, "");
+
+	const [startR, startG, startB] = hexToRgb(startColor);
+	const [endR, endG, endB] = hexToRgb(endColor);
+
+	const diffR = startR - endR;
+	const diffG = startG - endG;
+	const diffB = startB - endB;
+
+	let stepR, stepG, stepB;
+
+	if (workingText.length > 1) {
+		stepR = diffR / (workingText.length - 1);
+		stepG = diffG / (workingText.length - 1);
+		stepB = diffB / (workingText.length - 1);
+	} else {
+		stepR = 0;
+		stepG = 0;
+		stepB = 0;
+	}
+
+	let output = "";
+
+	for (let i = 0; i < workingText.length; i++) {
+		let hexCode = "&#";
+
+		hexCode += ("0" + (startR - Math.round(stepR * i)).toString(16)).slice(
+			-2
+		);
+
+		hexCode += ("0" + (startG - Math.round(stepG * i)).toString(16)).slice(
+			-2
+		);
+
+		hexCode += ("0" + (startB - Math.round(stepB * i)).toString(16)).slice(
+			-2
+		);
+
+		hexCode += workingText[i];
+		output += hexCode;
+	}
+
+	return output;
+};
+
+const createGradientApplicator = (gradient: PrideColor) => {
+	let out = "";
+	nick.value = nick.value.replace(/&([0-9a-f]|#[0-9a-f]{6})/gi, "");
+
+	if (nick.value.length < gradient.colors.length) {
+		status.value = "Your nickname is too short for this gradient.";
+		return;
+	}
+
+	const sections = nick.value.length / (gradient.colors.length - 1);
+	const stages = gradient.colors.length - 1;
+
+	for (let index = 0; index < stages; index++) {
+		const textToSend = nick.value.slice(
+			Math.floor(sections * index),
+			Math.floor(sections * (index + 1))
+		);
+
+		out += calculateGradientColor(
+			textToSend,
+			gradient.colors[index],
+			gradient.colors[index + 1]
+		);
+	}
+
+	nick.value = out;
+	showPreview();
 };
 </script>

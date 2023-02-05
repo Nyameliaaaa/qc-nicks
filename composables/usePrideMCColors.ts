@@ -64,7 +64,7 @@ export default function (): PrideColor[] {
 		},
 		{
 			name: "Genderfae",
-			colors: ["2", "a", "e", "f", "c", "d", "5", "1"],
+			colors: ["1", "5", "d", "c", "f", "e", "a", "2"],
 			repeat: false,
 		},
 		{
@@ -104,12 +104,12 @@ export default function (): PrideColor[] {
 		},
 		{
 			name: "Lesbian",
-			colors: ["5", "d", "f", "c", "4"],
+			colors: ["4", "c", "f", "d", "5"],
 			repeat: false,
 		},
 		{
 			name: "Non-Binary",
-			colors: ["8", "5", "f", "e"],
+			colors: ["e", "f", "5", "8"],
 			repeat: false,
 		},
 		{
