@@ -2,6 +2,7 @@
 	<h1 class="text-4xl font-bold dark:text-white text-center mb-2">
 		<span class="text-pink-500 font-extrabold">Amelia</span>'s Nick Helper
 	</h1>
+
 	<p class="text-lg dark:text-white mb-4">
 		Type the name you want in the <code>Nickname.</code> field, see it in
 		the <code>Preview</code>.
@@ -10,63 +11,9 @@
 		readable, tho.
 	</p>
 
-	<div class="sticky top-0 shadow-lg z-50">
-		<block class="flex flex-col gap-2">
-			<h2 class="text-gray-800 dark:text-gray-400 text-md font-medium">
-				Preview
-			</h2>
-			<p
-				class="text-white text-3xl font-bold text-center py-2 rounded-md"
-				:class="`[background-image:_linear-gradient(#131a1b,#131a1b),_url('/assets/img/blank_sign.png')] [background-blend-mode:_hard-light]`"
-			>
-				<span
-					v-for="section in preview"
-					:style="`color: ${section.color};text-shadow: 4px 4px 0 #002929; font-family: Minecraft;`"
-				>
-					{{ section.text }}
-				</span>
-			</p>
-		</block>
-	</div>
-
-	<block>
-		<label class="block">
-			<h2 class="text-gray-800 dark:text-gray-400 text-md font-medium">
-				Nickname
-			</h2>
-			<input
-				type="text"
-				class="mt-0 block w-full px-0.5 border-0 border-b-2 border-black dark:border-gray-200 focus:ring-0 focus:border-pink- dark:focus:border-pink-600 dark:bg-neutral-800 transition-all dark:text-white"
-				v-model="nick"
-				@input.prevent="updateNick"
-			/>
-		</label>
-
-		<p class="text-gray-800 dark:text-gray-400 mt-1">{{ status }}</p>
-	</block>
-
-	<block>
-		<div class="flex flex-row justify-between">
-			<h2 class="text-gray-800 dark:text-gray-400 text-md font-medium">
-				Command
-			</h2>
-			<button class="flex flex-row gap-2 group" @click="copyCommand">
-				<p
-					class="dark:text-white text-md group-hover:text-pink-500 transition-all"
-				>
-					{{ copied ? "Copied!" : "Copy Command" }}
-				</p>
-				<Icon
-					name="material-symbols:content-copy-outline-rounded"
-					class="dark:text-white text-lg font-semibold group-hover:text-pink-500 transition-all"
-					size="24"
-				/>
-			</button>
-		</div>
-		<code class="dark:text-white text-lg font-bold" :ref="nickCommand">
-			/nick {{ nick }}
-		</code>
-	</block>
+	<nickname-preview />
+	<nickname-input />
+	<copy-command />
 
 	<block>
 		<h2 class="text-gray-800 dark:text-gray-400 text-md font-medium">
@@ -234,26 +181,20 @@ const prideColors = usePrideColors();
 const gradients = useGradients();
 const nickCommand = ref<VNodeRef>();
 
-const colorMap: Record<string, string> = {};
-blockMCColors.map((color) => (colorMap[color.hexId] = color.backgroundColor));
+const colorMap = useColorMap();
 
 // State
-const nick = useState("input", () => {
-	return "Queercraft";
-});
+const nick = useNick();
+const preview = usePreview();
 
-const preview = useState<OutputLexicalNode[]>("output", () => [
-	{ color: colorMap["f"], text: nick.value },
-]);
-
-const status = useState("status", () => "");
+const status = useStatus();
 const id = useState<string | null | undefined>("id", () => null);
 
 const macro = useState("macro", () => "");
 const repeat = useState("repeat", () => false);
 const color = useState("color", () => "#ffffff");
 
-const copied = useState("isCopying", () => false);
+const copied = useState("copied", () => false);
 
 // Handle the preview field.
 const showPreview = () => {
@@ -387,17 +328,6 @@ const hexToRgb = (hex: string) => {
 		: [];
 };
 
-const updateColor = (event: any) => {
-	color.value = event.cssColor;
-	nick.value = nick.value
-		.replaceAll(/&([A-Fr0-9]|#[0-9A-F]{6})/gi, "")
-		.replaceAll("&#", "");
-
-	console.log(color.value);
-	nick.value = `&${color.value}${nick.value}`;
-	showPreview();
-};
-
 // thanks to sarah and xenni for this masterpiece
 const calculateGradientColor = (
 	workingText: string,
@@ -476,14 +406,5 @@ const createGradientApplicator = (gradient: PrideColor) => {
 
 	nick.value = out;
 	showPreview();
-};
-
-const copyCommand = () => {
-	navigator.clipboard.writeText(`/nick ${nick.value}`);
-	copied.value = true;
-
-	setTimeout(() => {
-		copied.value = false;
-	}, 1000);
 };
 </script>
