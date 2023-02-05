@@ -1,6 +1,6 @@
 <template>
 	<block>
-		<h2 class="text-gray-800 dark:text-gray-400 text-md font-medium">
+		<h2 class="text-md font-medium text-gray-800 dark:text-gray-400">
 			Pride
 		</h2>
 
@@ -13,7 +13,7 @@
 					:key="tab"
 				>
 					<div
-						class="dark:text-white text-center cursor-pointer p-2 rounded-md hover:bg-slate-200 hover:dark:bg-neutral-700 transition-all"
+						class="cursor-pointer rounded-md p-2 text-center transition-all duration-500 hover:bg-white dark:text-white hover:dark:bg-neutral-700"
 						:class="{
 							'font-semibold dark:bg-neutral-700/70': selected,
 						}"

@@ -1,23 +1,23 @@
 <template>
 	<block>
 		<div class="flex flex-row justify-between">
-			<h2 class="text-gray-800 dark:text-gray-400 text-md font-medium">
+			<h2 class="text-md font-medium text-gray-800 dark:text-gray-400">
 				Command
 			</h2>
-			<button class="flex flex-row gap-2 group" @click="copyCommand">
+			<button class="group flex flex-row gap-2" @click="copyCommand">
 				<p
-					class="dark:text-white text-md group-hover:text-pink-500 transition-all"
+					class="text-md transition-all duration-500 group-hover:text-pink-500 dark:text-white"
 				>
 					{{ justCopied ? "Copied!" : "Copy Command" }}
 				</p>
 				<Icon
 					name="material-symbols:content-copy-outline-rounded"
-					class="dark:text-white text-lg font-semibold group-hover:text-pink-500 transition-all"
+					class="text-lg font-semibold transition-all duration-500 group-hover:text-pink-500 dark:text-white"
 					size="24"
 				/>
 			</button>
 		</div>
-		<code class="dark:text-white text-lg font-bold">
+		<code class="text-lg font-bold dark:text-white">
 			/nick {{ nick }}
 		</code>
 	</block>

@@ -1,13 +1,16 @@
 <template>
 	<tab-panel>
-		<div class="grid grid-cols-4 md:grid-cols-5">
+		<div
+			class="grid grid-cols-4"
+			:class="gradient ? `md:grid-cols-4` : `md:grid-cols-6`"
+		>
 			<!-- if we don't have gradient -->
 			<button
 				v-if="!gradient"
 				v-for="item in items"
 				:key="item.name"
 				@click="$emit('button-click', item)"
-				class="rounded-md m-2 p-2"
+				class="m-2 rounded-md bg-slate-200 p-2 transition-all duration-500 hover:bg-slate-200/60 dark:bg-neutral-900 hover:dark:bg-neutral-700"
 			>
 				<p>
 					<span
@@ -29,11 +32,11 @@
 				:key="item.name"
 				@click="$emit('button-click', item)"
 				:style="`background: linear-gradient(90deg, ${item.colors
-					.join(', ')
-					.slice(0, -2)});`"
-				class="rounded-md p-3 m-2"
+					.map((x) => `rgb(${useRGB(x).join(',')})`)
+					.join(',')});`"
+				class="m-2 rounded-md p-3"
 			>
-				<p class="font-semibold text-shadow-xl shadow-black">
+				<p class="text-shadow-lg font-semibold shadow-black">
 					{{ item.name }}
 				</p>
 			</button>

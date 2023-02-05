@@ -5,12 +5,12 @@
 		<!-- Color maps & Gradient Logic are taken from Xenni's color helper. Everything else is Amelia's. -->
 
 		<Head>
-			<Title>QC Nicks Helper</Title>
+			<Title>Amelia's Nickname Helper :D</Title>
 		</Head>
 		<Body
-			class="bg-slate-100 dark:bg-neutral-900 font-sans overflow-x-clip"
+			class="overflow-x-clip bg-slate-100 font-sans  dark:bg-neutral-900"
 		>
-			<div class="max-w-5xl mx-auto p-2">
+			<div class="mx-auto max-w-5xl p-2">
 				<nuxt-page />
 			</div>
 		</Body>

@@ -3,26 +3,26 @@
 		<form @submit.prevent="useUpdateMacro">
 			<label class="block">
 				<h2
-					class="text-gray-800 dark:text-gray-400 text-md font-medium"
+					class="text-md font-medium text-gray-800 dark:text-gray-400"
 				>
 					Macro
 				</h2>
 
-				<div class="flex flex-row justify-between items-center gap-4">
+				<div class="flex flex-row items-center justify-between gap-4">
 					<input
 						type="text"
-						class="mt-0 block flex-1 px-0.5 border-0 border-b-2 border-black dark:border-gray-200 focus:ring-0 focus:border-pink- dark:focus:border-pink-600 dark:bg-neutral-800 transition-all dark:text-white"
+						class="mt-0 block w-full border-0 border-b-2 border-black bg-white px-0.5 transition-all duration-500 focus:border-pink-600 focus:ring-0 dark:border-gray-200 dark:bg-neutral-800 dark:text-white dark:focus:border-pink-500"
 						v-model="macroState.macro"
 					/>
 					<div>
 						<input
 							type="submit"
 							value="Apply"
-							class="dark:text-white font-semibold hover:font-bold transition-all cursor-pointer bg-slate-200 p-2 rounded-md dark:bg-neutral-700"
+							class="cursor-pointer rounded-md bg-white p-2 font-semibold transition-all duration-500 hover:font-bold dark:bg-neutral-700 dark:text-white"
 						/>
 					</div>
 				</div>
-				<div class="flex flex-row gap-2 mt-2">
+				<div class="mt-2 flex flex-row gap-2">
 					<Switch
 						v-model="macroState.repeat"
 						@update:model-value="useUpdateMacro"

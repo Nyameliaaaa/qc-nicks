@@ -1,18 +1,18 @@
 <template>
 	<block>
 		<label class="block">
-			<h2 class="text-gray-800 dark:text-gray-400 text-md font-medium">
+			<h2 class="text-md font-medium text-zinc-700 dark:text-gray-400">
 				Nickname
 			</h2>
 			<input
 				type="text"
-				class="mt-0 block w-full px-0.5 border-0 border-b-2 border-black dark:border-gray-200 focus:ring-0 focus:border-pink- dark:focus:border-pink-600 dark:bg-neutral-800 transition-all dark:text-white"
+				class="mt-0 block w-full border-0 border-b-2 border-black bg-white px-0.5 transition-all duration-500 focus:border-pink-600 focus:ring-0 dark:border-gray-200 dark:bg-neutral-800 dark:text-white dark:focus:border-pink-500"
 				v-model="nick"
 				@input.prevent="updateNick"
 			/>
 		</label>
 
-		<p class="text-gray-800 dark:text-gray-400 mt-1">{{ status }}</p>
+		<p class="mt-2 text-gray-800 dark:text-gray-400">{{ status }}</p>
 	</block>
 </template>
 
@@ -20,7 +20,7 @@
 const nick = useNick();
 const status = useStatus();
 
-const updateNick = () => {
+const validateNick = () => {
 	let filter = nick.value.replace(/&([A-Fr0-9]|#[0-9A-F]{6})/gi, "");
 	let invalidCharCheck = nick.value.match(/[^\w&#]/gi);
 
@@ -39,7 +39,12 @@ const updateNick = () => {
 			status.value = "Nickname can't contain " + invalidCharCheck[0];
 		}
 	}
+};
 
+const updateNick = () => {
+	validateNick();
 	useUpdatePreview();
 };
+
+onMounted(() => validateNick());
 </script>
