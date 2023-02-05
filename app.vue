@@ -2,7 +2,7 @@
 	<Html v-bind:class="colorMode.value">
 		<!-- Made with ❤️ by Amelia (@nightlake@tech.lgbt). -->
 		<!-- Using Nuxt, Tailwind, Vue and Vite.  -->
-		<!-- Color maps are taken from Xenni's color helper. Everything else is Amelia's. -->
+		<!-- Color maps & Gradient Logic are taken from Xenni's color helper. Everything else is Amelia's. -->
 
 		<Head>
 			<Title>QC Nicks Helper</Title>
