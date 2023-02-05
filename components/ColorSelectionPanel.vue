@@ -34,9 +34,11 @@
 				:style="`background: linear-gradient(90deg, ${item.colors
 					.map((x) => `rgb(${useRGB(x).join(',')})`)
 					.join(',')});`"
-				class="m-2 rounded-md p-3"
+				class="m-2 rounded-md p-3 transition-all duration-500 hover:drop-shadow-xl"
 			>
-				<p class="text-shadow-lg font-semibold shadow-black">
+				<p
+					class="text-shadow-lg font-semibold text-neutral-900 shadow-black"
+				>
 					{{ item.name }}
 				</p>
 			</button>
