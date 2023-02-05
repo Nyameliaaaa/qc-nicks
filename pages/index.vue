@@ -10,10 +10,8 @@
 		readable, tho.
 	</p>
 
-	<div
-		class="p-6 bg-slate-200 dark:bg-neutral-800 my-2 rounded-xl sticky top-0 shadow-lg z-50"
-	>
-		<div class="flex flex-col gap-2">
+	<div class="sticky top-0 shadow-lg z-50">
+		<block class="flex flex-col gap-2">
 			<h2 class="text-gray-800 dark:text-gray-400 text-md font-medium">
 				Preview
 			</h2>
@@ -28,10 +26,10 @@
 					{{ section.text }}
 				</span>
 			</p>
-		</div>
+		</block>
 	</div>
 
-	<div class="p-6 bg-slate-200 dark:bg-neutral-800 my-2 rounded-xl">
+	<block>
 		<label class="block">
 			<h2 class="text-gray-800 dark:text-gray-400 text-md font-medium">
 				Nickname
@@ -42,30 +40,35 @@
 				v-model="nick"
 				@input.prevent="updateNick"
 			/>
-
-			<div class="flex flex-row items-center gap-2 mt-5">
-				<h2
-					class="text-gray-800 dark:text-gray-400 text-md font-medium"
-				>
-					Command
-				</h2>
-				<code class="dark:text-white text-xl font-bold text-center">
-					/nick {{ nick }}
-				</code>
-				<button @click="">
-					<Icon
-						name="material-symbols:content-copy-outline-rounded"
-						class="dark:text-white text-lg font-semibold"
-						size="24"
-					/>
-				</button>
-			</div>
 		</label>
 
 		<p class="text-gray-800 dark:text-gray-400 mt-1">{{ status }}</p>
-	</div>
+	</block>
 
-	<div class="p-6 bg-slate-200 dark:bg-neutral-800 my-2 rounded-xl">
+	<block>
+		<div class="flex flex-row justify-between">
+			<h2 class="text-gray-800 dark:text-gray-400 text-md font-medium">
+				Command
+			</h2>
+			<button class="flex flex-row gap-2 group" @click="copyCommand">
+				<p
+					class="dark:text-white text-md group-hover:text-pink-500 transition-all"
+				>
+					{{ copied ? "Copied!" : "Copy Command" }}
+				</p>
+				<Icon
+					name="material-symbols:content-copy-outline-rounded"
+					class="dark:text-white text-lg font-semibold group-hover:text-pink-500 transition-all"
+					size="24"
+				/>
+			</button>
+		</div>
+		<code class="dark:text-white text-lg font-bold" :ref="nickCommand">
+			/nick {{ nick }}
+		</code>
+	</block>
+
+	<block>
 		<h2 class="text-gray-800 dark:text-gray-400 text-md font-medium">
 			Colors
 		</h2>
@@ -75,7 +78,7 @@
 				:key="color.colorName"
 				:style="`background-color: ${color.backgroundColor}; color: ${color.textColor}`"
 				class="p-2 rounded-md m-2"
-				@click.prevent="(event) => declareColorFunc(color)"
+				@click.prevent="() => declareColorFunc(color)"
 			>
 				<p class="font-semibold">{{ color.colorName }}</p>
 				<p>&{{ color.hexId }}</p>
@@ -87,9 +90,9 @@
 				Or add your own? [unfinished]
 			</h2>
 		</label>
-	</div>
+	</block>
 
-	<div class="p-6 bg-slate-200 dark:bg-neutral-800 my-2 rounded-xl">
+	<block>
 		<h2 class="text-gray-800 dark:text-gray-400 text-md font-medium">
 			Pride
 		</h2>
@@ -101,8 +104,8 @@
 					v-slot="{ selected }"
 					v-for="tab in [
 						'Block MC Colors',
-						'Flag Hexadecimals',
-						'Gradients',
+						'Flag Hexadecimals [unfinished]',
+						'Gradients [needs more]',
 					]"
 					:key="tab"
 				>
@@ -135,9 +138,9 @@
 				/>
 			</tab-panels>
 		</tab-group>
-	</div>
+	</block>
 
-	<div class="p-6 bg-slate-200 dark:bg-neutral-800 my-2 rounded-xl">
+	<block>
 		<form @submit.prevent="handleMacro">
 			<label class="block">
 				<h2
@@ -177,18 +180,18 @@
 				</div>
 			</label>
 		</form>
-	</div>
+	</block>
 
-	<div class="p-6 bg-slate-200 dark:bg-neutral-800 my-2 rounded-xl">
+	<block>
 		<h2 class="text-gray-800 dark:text-gray-400 text-md font-medium">
 			Custom Gradients [unfinished]
 		</h2>
-	</div>
+	</block>
 
-	<div class="p-6 bg-slate-200 dark:bg-neutral-800 my-2 rounded-xl">
+	<block>
 		<div class="flex flex-row justify-between">
 			<h2 class="text-gray-800 dark:text-gray-400 text-md font-medium">
-				Save your Nickname [unfinished]
+				Save Nickname [unfinished]
 			</h2>
 			<button class="flex flex-row gap-2 group">
 				<p
@@ -196,34 +199,40 @@
 				>
 					{{ id ?? "Save Nickname" }}
 				</p>
-				<Icon
+				<icon
 					name="material-symbols:save-outline-rounded"
 					class="dark:text-white text-lg font-semibold group-hover:text-pink-500 transition-all"
 					size="24"
 				/>
 			</button>
 		</div>
-	</div>
+	</block>
 
-	<div class="p-6 bg-slate-200 dark:bg-neutral-800 my-2 rounded-xl">
+	<block>
 		<p class="text-center dark:text-white font-semibold">
 			Made with ❤️ by Amelia.
 		</p>
 		<p class="text-center dark:text-gray-400 text-gray-800">
 			This tool is not made by, or ran by the Prism foundation.
 		</p>
-	</div>
+	</block>
 </template>
 
 <script setup lang="ts">
 import { TabGroup, TabList, Tab, TabPanels, Switch } from "@headlessui/vue";
-import { BlockMCColor, OutputLexicalNode, PrideColor } from "~~/utils/types";
+import { VNodeRef } from "vue";
+import type {
+	BlockMCColor,
+	OutputLexicalNode,
+	PrideColor,
+} from "~~/utils/types";
 
 // Constants
 const blockMCColors = useBlockMCColors();
 const prideMCColors = usePrideMCColors();
 const prideColors = usePrideColors();
 const gradients = useGradients();
+const nickCommand = ref<VNodeRef>();
 
 const colorMap: Record<string, string> = {};
 blockMCColors.map((color) => (colorMap[color.hexId] = color.backgroundColor));
@@ -243,6 +252,8 @@ const id = useState<string | null | undefined>("id", () => null);
 const macro = useState("macro", () => "");
 const repeat = useState("repeat", () => false);
 const color = useState("color", () => "#ffffff");
+
+const copied = useState("isCopying", () => false);
 
 // Handle the preview field.
 const showPreview = () => {
@@ -465,5 +476,14 @@ const createGradientApplicator = (gradient: PrideColor) => {
 
 	nick.value = out;
 	showPreview();
+};
+
+const copyCommand = () => {
+	navigator.clipboard.writeText(`/nick ${nick.value}`);
+	copied.value = true;
+
+	setTimeout(() => {
+		copied.value = false;
+	}, 1000);
 };
 </script>

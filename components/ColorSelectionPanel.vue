@@ -1,7 +1,7 @@
 <template>
 	<tab-panel>
-		<!-- if we don't have gradient -->
-		<div class="grid grid-cols-4 md:grid-cols-7">
+		<div class="grid grid-cols-4 md:grid-cols-5">
+			<!-- if we don't have gradient -->
 			<button
 				v-if="!gradient"
 				v-for="item in items"
@@ -30,10 +30,10 @@
 				@click="$emit('button-click', item)"
 				:style="`background: linear-gradient(90deg, ${item.colors
 					.join(', ')
-					.slice(0, -1)});`"
-				class="rounded-md p-3"
+					.slice(0, -2)});`"
+				class="rounded-md p-3 m-2"
 			>
-				<p class="font-semibold dark:text-white drop-shadow-xl">
+				<p class="font-semibold text-shadow-xl shadow-black">
 					{{ item.name }}
 				</p>
 			</button>
