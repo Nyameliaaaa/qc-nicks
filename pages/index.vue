@@ -38,9 +38,6 @@
 
 	<block>
 		<p class="text-center font-semibold dark:text-white">Made with ❤️ by Amelia.</p>
-		<p class="text-center text-gray-800 dark:text-gray-400">
-			This tool is not made by, or ran by the Prism foundation.
-		</p>
 	</block>
 </template>
 
