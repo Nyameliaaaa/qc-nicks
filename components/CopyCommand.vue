@@ -1,9 +1,7 @@
 <template>
 	<block>
 		<div class="flex flex-row justify-between">
-			<h2 class="text-md font-medium text-gray-800 dark:text-gray-400">
-				Command
-			</h2>
+			<h2 class="text-md font-medium text-gray-800 dark:text-gray-400">Command</h2>
 			<button class="group flex flex-row gap-2" @click="copyCommand">
 				<p
 					class="text-md transition-all duration-500 group-hover:text-pink-500 dark:text-white"
@@ -17,9 +15,7 @@
 				/>
 			</button>
 		</div>
-		<code class="text-lg font-bold dark:text-white">
-			/nick {{ nick }}
-		</code>
+		<code class="w-full text-lg font-bold dark:text-white"> /nick {{ nick }} </code>
 	</block>
 </template>
 

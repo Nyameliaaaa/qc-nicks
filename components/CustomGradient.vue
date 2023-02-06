@@ -34,7 +34,7 @@
 		<div
 			v-for="(gradient, index) in gradientState"
 			:key="index"
-			class="my-2 flex items-center justify-between rounded-lg bg-slate-200 p-2 dark:bg-neutral-900"
+			class="my-2 flex flex-col justify-between gap-2 rounded-lg bg-slate-200 p-2 dark:bg-neutral-900 md:flex-row md:items-center md:gap-0"
 		>
 			<div class="flex flex-row items-center gap-2">
 				<div
@@ -45,9 +45,9 @@
 					{{ gradient }}
 				</p>
 			</div>
-			<div class="flex flex-row items-center gap-2">
+			<div class="flex flex-row items-center justify-between gap-2 md:justify-end">
 				<button
-					class="group flex flex-row gap-2"
+					class="group"
 					@click="() => moveItem(gradientState, index, index - 1)"
 					:disabled="index === 0"
 				>
@@ -63,7 +63,7 @@
 					/>
 				</button>
 				<button
-					class="group flex flex-row gap-2"
+					class="group"
 					@click="() => moveItem(gradientState, index, index + 1)"
 					:disabled="index === gradientState.length - 1"
 				>

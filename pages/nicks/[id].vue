@@ -1,24 +1,18 @@
 <template>
 	<div v-if="pending">
 		<h1 class="mb-2 text-center text-4xl font-bold dark:text-white">
-			<span class="font-extrabold text-pink-500">Amelia</span>'s Nickname
-			Helper
+			<span class="font-extrabold text-pink-500">Amelia</span>'s Nickname Helper
 		</h1>
 
-		<p class="mb-4 text-lg dark:text-white">
-			Your nickname is being loaded.
-		</p>
+		<p class="mb-4 text-lg dark:text-white">Your nickname is being loaded.</p>
 	</div>
 
 	<div v-if="error">
 		<h1 class="mb-2 text-center text-4xl font-bold dark:text-white">
-			<span class="font-extrabold text-pink-500">Amelia</span>'s Nickname
-			Helper
+			<span class="font-extrabold text-pink-500">Amelia</span>'s Nickname Helper
 		</h1>
 
-		<p class="mb-4 text-lg dark:text-white">
-			Something went horribly wrong.
-		</p>
+		<p class="mb-4 text-lg dark:text-white">Something went horribly wrong.</p>
 	</div>
 </template>
 
@@ -35,7 +29,7 @@ if (error.value) {
 }
 
 if (data.value) {
-	nick.value = JSON.parse(data.value.nick).nick;
+	nick.value = data.value.nick;
 	useUpdatePreview();
 	navigateTo("/");
 }

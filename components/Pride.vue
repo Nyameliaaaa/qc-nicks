@@ -3,7 +3,7 @@
 		<h2 class="text-md font-medium text-gray-800 dark:text-gray-400">Pride</h2>
 
 		<tab-group>
-			<tab-list class="grid grid-cols-3 gap-2">
+			<tab-list class="grid grid-cols-1 gap-2 md:grid-cols-3">
 				<tab as="template" v-slot="{ selected }" v-for="tab in tabs" :key="tab">
 					<div
 						class="cursor-pointer rounded-md p-2 text-center transition-all duration-500 hover:bg-white dark:text-white hover:dark:bg-neutral-700"

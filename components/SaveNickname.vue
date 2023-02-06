@@ -1,8 +1,8 @@
 <template>
 	<block>
-		<div class="flex flex-row justify-between">
+		<div class="flex flex-row items-center justify-between">
 			<h2 class="text-md font-medium text-gray-800 dark:text-gray-400">
-				Save Nickname
+				Save Nickname [Stored for 18 months]
 			</h2>
 			<button class="group flex flex-row gap-2" @click="saveNickname">
 				<p
@@ -50,9 +50,7 @@ const saveNickname = () => {
 
 	if (data && data.value) {
 		text.value = `Copied! Save ID: ${data.value.id}`;
-		navigator.clipboard.writeText(
-			`${window.location.href}nicks/${data.value.id}`
-		);
+		navigator.clipboard.writeText(`${window.location.href}nicks/${data.value.id}`);
 
 		setTimeout(() => {
 			text.value = "Save Nickname";

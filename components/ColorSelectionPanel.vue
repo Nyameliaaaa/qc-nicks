@@ -1,7 +1,7 @@
 <template>
 	<tab-panel>
 		<div
-			class="grid grid-cols-4"
+			class="grid grid-cols-2"
 			:class="gradient ? `md:grid-cols-4` : `md:grid-cols-6`"
 		>
 			<!-- if we don't have gradient -->

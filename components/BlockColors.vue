@@ -18,7 +18,7 @@
 				/>
 			</button>
 		</div>
-		<div class="grid grid-cols-4 md:grid-cols-6">
+		<div class="grid grid-cols-2 md:grid-cols-6">
 			<button
 				v-for="color in blockMCColors"
 				:key="color.colorName"
