@@ -21,7 +21,6 @@
 </template>
 
 <script setup lang="ts">
-const route = useRoute();
 const nick = useNick();
 const text = useState("text", () => "Save Nickname");
 

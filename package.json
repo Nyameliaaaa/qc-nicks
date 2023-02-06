@@ -17,6 +17,8 @@
     "@headlessui/vue": "^1.7.8",
     "@nuxtjs/color-mode": "^3.2.0",
     "@tailwindcss/forms": "^0.5.3",
-    "nuxt-icon": "^0.2.10"
+    "nuxt-icon": "^0.2.10",
+    "vue-accessible-color-picker": "^4.1.2",
+    "vue-gpickr": "^1.0.0"
   }
 }
