@@ -16,7 +16,7 @@
 						<DialogDescription
 							class="text-lg font-medium text-gray-800 dark:text-gray-400"
 						>
-							Use the color picker below to add the color.
+							Use the color picker below to add color.
 						</DialogDescription>
 
 						<div class="mt-2 flex justify-center">
@@ -26,7 +26,7 @@
 								defaultFormat="hex"
 								:visibleFormats="['hex']"
 								@color-change="updateColor"
-								class="dark:bg-neutral-800"
+								class="dark:bg-neutral-800 dark:text-white"
 							>
 								<template v-slot:copy-button />
 							</ColorPicker>
@@ -63,6 +63,7 @@
 <script setup lang="ts">
 import { ColorChangeEvent, ColorPicker } from "vue-accessible-color-picker";
 import { Dialog, DialogPanel, DialogTitle, DialogDescription } from "@headlessui/vue";
+
 const modal = useModal();
 const color = useState("modalGradient", () => "#ffffff");
 
@@ -74,3 +75,22 @@ const updateColor = (event: ColorChangeEvent) => {
 	color.value = event.cssColor;
 };
 </script>
+
+<style>
+#color-picker-color-hex {
+	@apply mt-0 block w-full border-0 border-b-2 border-black bg-white px-0.5 transition-all duration-500 focus:border-pink-600 focus:ring-0 dark:border-gray-200 dark:bg-neutral-800 dark:text-white dark:focus:border-pink-500;
+}
+
+.vacp-copy-button {
+	@apply dark:bg-neutral-900;
+}
+
+.vacp-color-input-label,
+.vacp-color-input-label-text {
+	@apply text-left;
+}
+
+.vacp-color-input-label {
+	@apply mt-2;
+}
+</style>
