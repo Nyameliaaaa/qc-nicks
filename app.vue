@@ -10,7 +10,12 @@
 		</Head>
 		<Body class="bg-slate-100 font-sans dark:bg-neutral-900">
 			<div
-				class="mb-3 h-4 w-full rounded-md"
+				v-if="!randomGradient"
+				class="h-4 w-full bg-white dark:bg-neutral-800"
+			></div>
+			<div
+				v-if="randomGradient"
+				class="h-4 w-full"
 				:style="`background: linear-gradient(90deg, ${randomGradient.colors
 					.map((x) => `rgb(${useRGB(x).join(',')})`)
 					.join(',')});`"
@@ -27,9 +32,13 @@
 
 <script setup lang="ts">
 import "@/assets/css/tailwind.css";
+import { PrideColor } from "./utils/types";
 const colorMode = useColorMode();
 const modal = useModal();
+const randomGradient = useState<PrideColor | null>("random", () => null);
 
-const all = [...useGradients(), ...usePrideColors()];
-const randomGradient = all[Math.floor(Math.random() * all.length)];
+onMounted(() => {
+	const all = [...useGradients(), ...usePrideColors()];
+	randomGradient.value = all[Math.floor(Math.random() * all.length)];
+});
 </script>
