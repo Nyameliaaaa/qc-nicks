@@ -2,9 +2,7 @@
 	<block>
 		<form @submit.prevent="useUpdateMacro">
 			<label class="block">
-				<h2
-					class="text-md font-medium text-gray-800 dark:text-gray-400"
-				>
+				<h2 class="text-md font-medium text-gray-800 dark:text-gray-400">
 					Macro
 				</h2>
 
@@ -26,18 +24,12 @@
 					<Switch
 						v-model="macroState.repeat"
 						@update:model-value="useUpdateMacro"
-						:class="
-							macroState.repeat ? 'bg-pink-600' : 'bg-slate-700'
-						"
+						:class="macroState.repeat ? 'bg-pink-600' : 'bg-slate-700'"
 						class="relative inline-flex h-6 w-11 items-center rounded-full"
 					>
 						<span class="sr-only">Repeat</span>
 						<span
-							:class="
-								macroState.repeat
-									? 'translate-x-6'
-									: 'translate-x-1'
-							"
+							:class="macroState.repeat ? 'translate-x-6' : 'translate-x-1'"
 							class="inline-block h-4 w-4 transform rounded-full bg-white transition"
 						/>
 					</Switch>
