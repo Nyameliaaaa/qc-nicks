@@ -80,7 +80,7 @@
 				</button>
 				<button
 					@click="removeGradient({ gradient, index })"
-					class="group flex flex-row gap-2 rounded-lg bg-white p-2 font-semibold transition-all duration-500 hover:bg-slate-200/60 hover:shadow-lg dark:bg-neutral-900 dark:text-white hover:dark:bg-neutral-700"
+					class="group flex flex-row gap-2 rounded-lg bg-white p-2 font-semibold transition-all duration-500 hover:bg-white/60 hover:shadow-lg dark:bg-neutral-900 dark:text-white hover:dark:bg-neutral-700"
 				>
 					<p class="transition-all duration-500 group-hover:text-pink-500">
 						Delete color

@@ -15,7 +15,9 @@
 				/>
 			</button>
 		</div>
-		<code class="w-full text-lg font-bold dark:text-white"> /nick {{ nick }} </code>
+		<code class="w-full text-lg font-bold [word-break:_break-all] dark:text-white">
+			/nick {{ nick }}
+		</code>
 	</block>
 </template>
 
