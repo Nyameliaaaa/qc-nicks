@@ -1,26 +1,21 @@
-name: Deploy with gh-pages
-  run: |
-    git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-    npx gh-pages -d build -u "github-actions-bot <support+actions@github.com>"
-  env:
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+name: Deploy with GitHub Pages
 
 on:
-  push: {branches: ["master", "main"]}
-  
+    push: { branches: ["master", "main"] }
+
 jobs:
-  deploy:
-    name: Deploy NuxtJS
-    runs-on: ubuntu-latest
+    deploy:
+        name: Deploy NuxtJS
+        runs-on: ubuntu-latest
 
-    steps:
-      - name: Set Origin URL
-        run: git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+        steps:
+            - name: Set Origin URL
+              run: git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
 
-      - name: Generate Nuxt Build
-        run: nuxt generate
-      
-      - name: Deploy to Github pages
-        run: npx gh-pages --dotfiles -d .output/public -u "github-actions-bot <support+actions@github.com>" -m "Deploy build for commit ${{ GITHUB_SHA }}"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: Generate Nuxt Build
+              run: nuxt generate
+
+            - name: Deploy to Github pages
+              run: npx gh-pages --dotfiles -d .output/public -u "github-actions-bot <support+actions@github.com>" -m "Deploy build for commit ${{ GITHUB_SHA }}"
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
