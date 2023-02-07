@@ -5,10 +5,10 @@
 			@close="useUpdateModal(false)"
 			class="relative z-50 overflow-hidden"
 		>
-			<div class="fixed inset-0 bg-black/30" aria-hidden="true" />
+			<div class="fixed inset-0 bg-black/75" aria-hidden="true" />
 
 			<div class="fixed inset-0 flex items-center justify-center p-4">
-				<DialogPanel class="w-full max-w-md">
+				<DialogPanel class="w-full max-w-md drop-shadow-2xl">
 					<div class="rounded-t-lg bg-white p-4 dark:bg-neutral-800">
 						<DialogTitle class="text-2xl font-bold dark:text-white"
 							>Add color to gradient.</DialogTitle
