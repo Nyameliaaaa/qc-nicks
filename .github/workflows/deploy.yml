@@ -16,6 +16,6 @@ jobs:
               run: nuxt generate
 
             - name: Deploy to Github pages
-              run: npx gh-pages --dotfiles -d .output/public -u "github-actions-bot <support+actions@github.com>" -m "Deploy build for commit ${{ GITHUB_SHA }}"
+              run: npx gh-pages --dotfiles -d .output/public -u "github-actions-bot <support+actions@github.com>" -m "Deploy build"
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
