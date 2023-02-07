@@ -23,11 +23,11 @@ jobs:
 
             - name: Set Origin URL
               run: git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             - name: Generate Nuxt Build
               run: npx nuxt generate
 
             - name: Deploy to Github pages
               run: npx gh-pages --dotfiles -d .output/public -u "github-actions-bot <support+actions@github.com>" -m "Deploy build"
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
