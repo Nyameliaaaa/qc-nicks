@@ -27,7 +27,7 @@
 					:color-map="colorMap"
 				/>
 				<color-selection-panel
-					@button-click="useUpdateGradient"
+					@button-click="createGradientApplicator"
 					:items="gradients"
 					:color-map="colorMap"
 					:gradient="true"
@@ -51,15 +51,19 @@ const tabs = [
 	"Gradients [needs more]",
 ];
 
-const nick = useNick();
-const status = useStatus();
-
+const colors = useColors();
 const macroState = useMacro();
+
 let macro = macroState.value;
 
 const createPrideApplicator = (item: PrideColor) => {
 	macro.macro = item.colors.join("");
-	macro.repeat = item.repeat ?? false;
+	macro.repeat = Boolean(item.repeat) ?? false;
 	useUpdateMacro();
+};
+
+const createGradientApplicator = (item: PrideColor) => {
+	colors.value = item.colors.slice();
+	useUpdateGradient();
 };
 </script>

@@ -18,5 +18,50 @@
 </template>
 
 <script setup lang="ts">
-const preview = usePreview();
+import type { OutputLexicalNode } from "~~/utils/types";
+
+const nick = useNick();
+const colorMap = useColorMap();
+const preview = useState<OutputLexicalNode[]>("preview", () => [
+	{ color: colorMap["f"], text: nick.value },
+]);
+
+watch(nick, (newNick) => {
+	preview.value = [];
+
+	const parse = newNick.split("");
+	let index = 0;
+
+	while (index < parse.length) {
+		const value = parse[index];
+
+		if (value === "&") {
+			if (parse[index + 1] === "#") {
+				preview.value.push({
+					color: `${newNick.slice(index + 1, index + 8)}`,
+					text: "",
+				});
+
+				index += 8;
+			} else {
+				preview.value.push({
+					color: `${colorMap[parse[index + 1]]}`,
+					text: "",
+				});
+
+				index += 2;
+			}
+		} else {
+			if (preview.value.length === 0) {
+				preview.value.push({
+					color: "",
+					text: "",
+				});
+			}
+
+			preview.value[preview.value.length - 1].text += value;
+			index++;
+		}
+	}
+});
 </script>

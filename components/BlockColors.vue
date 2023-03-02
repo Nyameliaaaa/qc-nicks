@@ -60,8 +60,6 @@ const declareColorFunc = (
 	nick.value = `&${color.hexId}${
 		nick.value.startsWith("&") ? nick.value.slice(2) : nick.value
 	}`;
-
-	useUpdatePreview();
 };
 
 const updateColor = (color: string) => {

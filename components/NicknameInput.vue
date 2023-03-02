@@ -41,7 +41,6 @@ const validateNick = () => {
 
 const updateNick = () => {
 	validateNick();
-	useUpdatePreview();
 };
 
 onMounted(() => validateNick());

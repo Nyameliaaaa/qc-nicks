@@ -8,7 +8,7 @@
 		<h3 class="text-md text-gray-800 dark:text-gray-400">Preview</h3>
 		<div
 			class="mb-3 h-8 w-full rounded-md"
-			:style="`background: linear-gradient(90deg, ${gradientState
+			:style="`background: linear-gradient(90deg, ${colors
 				.map((x) => `rgb(${useRGB(x).join(',')})`)
 				.join(',')});`"
 		></div>
@@ -31,72 +31,69 @@
 				/>
 			</button>
 		</div>
-		<div
-			v-for="(gradient, index) in gradientState"
-			:key="index"
-			class="my-2 flex flex-col justify-between gap-2 rounded-lg bg-slate-200 p-2 dark:bg-neutral-900 md:flex-row md:items-center md:gap-0"
-		>
-			<div class="flex flex-row items-center gap-2">
-				<div
-					class="h-8 w-8 rounded-full"
-					:style="`background: ${gradient}`"
-				></div>
-				<p class="dark:text-white">
-					{{ gradient }}
-				</p>
-			</div>
-			<div class="flex flex-row items-center justify-between gap-2 md:justify-end">
-				<button
-					class="group"
-					@click="() => moveItem(gradientState, index, index - 1)"
-					:disabled="index === 0"
-				>
-					<icon
-						name="bx:chevron-up"
-						class="text-lg font-semibold transition-all duration-500"
-						size="36"
-						:class="
-							index === 0
-								? `cursor-not-allowed text-gray-800 dark:text-gray-400`
-								: `cursor-pointer group-hover:text-pink-500 dark:text-white`
-						"
-					/>
-				</button>
-				<button
-					class="group"
-					@click="() => moveItem(gradientState, index, index + 1)"
-					:disabled="index === gradientState.length - 1"
-				>
-					<icon
-						name="bx:chevron-down"
-						class="text-lg font-semibold transition-all duration-500"
-						size="36"
-						:class="
-							index === gradientState.length - 1
-								? `cursor-not-allowed text-gray-800 dark:text-gray-400`
-								: `cursor-pointer group-hover:text-pink-500 dark:text-white`
-						"
-					/>
-				</button>
-				<button
-					@click="removeGradient({ gradient, index })"
-					class="group flex flex-row gap-2 rounded-lg bg-white p-2 font-semibold transition-all duration-500 hover:bg-white/60 hover:shadow-lg dark:bg-neutral-900 dark:text-white hover:dark:bg-neutral-700"
-				>
-					<p class="transition-all duration-500 group-hover:text-pink-500">
-						Delete color
+
+		<template v-for="(gradient, index) in colors" :key="index">
+			<div
+				class="my-2 flex flex-col justify-between gap-2 rounded-lg bg-slate-200 p-2 dark:bg-neutral-900 md:flex-row md:items-center md:gap-0"
+			>
+				<div class="flex flex-row items-center gap-2">
+					<div
+						class="h-8 w-8 rounded-full"
+						:style="`background: ${gradient}`"
+					></div>
+					<p class="dark:text-white">
+						{{ gradient }}
 					</p>
-					<icon
-						name="material-symbols:delete-outline-rounded"
-						class="text-lg font-semibold transition-all duration-500 group-hover:text-pink-500 dark:text-white"
-						size="24"
-					/>
-				</button>
+				</div>
+				<div
+					class="flex flex-row items-center justify-between gap-2 md:justify-end"
+				>
+					<button
+						class="group"
+						@click="() => moveItem(colors, index, index - 1)"
+						:disabled="index === 0"
+					>
+						<icon
+							name="bx:chevron-up"
+							class="text-lg font-semibold transition-all duration-500"
+							size="36"
+							:class="
+								index === 0
+									? `cursor-not-allowed text-gray-800 dark:text-gray-400`
+									: `cursor-pointer group-hover:text-pink-500 dark:text-white`
+							"
+						/>
+					</button>
+					<button
+						class="group"
+						@click="() => moveItem(colors, index, index + 1)"
+						:disabled="index === colors.length - 1"
+					>
+						<icon
+							name="bx:chevron-down"
+							class="text-lg font-semibold transition-all duration-500"
+							size="36"
+							:class="
+								index === colors.length - 1
+									? `cursor-not-allowed text-gray-800 dark:text-gray-400`
+									: `cursor-pointer group-hover:text-pink-500 dark:text-white`
+							"
+						/>
+					</button>
+					<button @click="removeGradient({ gradient, index })" class="group">
+						<icon
+							name="material-symbols:delete-outline-rounded"
+							class="text-lg font-semibold transition-all duration-500 group-hover:text-pink-500 dark:text-white"
+							size="24"
+						/>
+					</button>
+				</div>
 			</div>
-		</div>
+		</template>
 
 		<button
 			class="group mt-3 flex flex-row gap-2 rounded-lg bg-white p-2 font-semibold transition-all duration-500 hover:bg-slate-200/60 hover:shadow-lg dark:bg-neutral-900 dark:text-white hover:dark:bg-neutral-700"
-			@click="useUpdateGradient({ colors: gradientState })"
+			@click="useUpdateGradient()"
 		>
 			<icon
 				name="material-symbols:add-circle-outline-rounded"
@@ -111,17 +108,18 @@
 		</button>
 	</block>
 
-	<GradientModal @color-update="(color) => gradientState.push(color)" />
+	<GradientModal @color-update="(color) => colors.push(color)" />
 </template>
 
 <script setup lang="ts">
-const gradientState = useColors();
+const colors = useColors();
+
 const removeGradient = (gradient: { index: number; gradient: string }) => {
-	if (gradientState.value.length <= 2) {
+	if (colors.value.length <= 2) {
 		return;
 	}
 
-	gradientState.value.splice(gradient.index, 1);
+	colors.value.splice(gradient.index, 1);
 };
 
 const moveItem = <T>(targetArray: T[], indexFrom: number, indexTo: number) => {
