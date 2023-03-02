@@ -25,8 +25,7 @@ export default function () {
 
 		out = inputChunk
 			.map(
-				(chunk, index) =>
-					`&${colorPattern[index % colorPattern.length]}${chunk}`
+				(chunk, index) => `&${colorPattern[index % colorPattern.length]}${chunk}`
 			)
 			.join("");
 	} else {
@@ -41,5 +40,4 @@ export default function () {
 	}
 
 	nick.value = out;
-	useUpdatePreview();
 }

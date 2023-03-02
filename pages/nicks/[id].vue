@@ -30,7 +30,6 @@ if (error.value) {
 
 if (data.value) {
 	nick.value = data.value.nick;
-	useUpdatePreview();
 	navigateTo("/");
 }
 </script>

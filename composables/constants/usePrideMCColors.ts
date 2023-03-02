@@ -13,6 +13,10 @@ export default function (): PrideColor[] {
 			repeat: false,
 		},
 		{
+			name: "Aroace",
+			colors: ["6", "e", "f", "9", "1"],
+		},
+		{
 			name: "Aromantic",
 			colors: ["2", "a", "f", "7", "8"],
 			repeat: false,
@@ -161,6 +165,10 @@ export default function (): PrideColor[] {
 			name: "Villain",
 			colors: ["8", "5", "a", "6", "d", "8"],
 			repeat: false,
+		},
+		{
+			name: "Vincian",
+			colors: ["2", "a", "f", "9", "1"],
 		},
 	];
 }

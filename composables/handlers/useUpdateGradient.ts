@@ -1,19 +1,18 @@
-import { PrideColor } from "~~/utils/types";
-
-export default function (gradient: Pick<PrideColor, "colors">) {
+export default function () {
 	const nick = useNick();
 	const status = useStatus();
+	const colors = useColors();
 
 	let out = "";
 	nick.value = nick.value.replace(/&([0-9a-f]|#[0-9a-f]{6})/gi, "");
 
-	if (nick.value.length < gradient.colors.length) {
+	if (nick.value.length < colors.value.length) {
 		status.value = "Your nickname is too short for this gradient.";
 		return;
 	}
 
-	const sections = nick.value.length / (gradient.colors.length - 1);
-	const stages = gradient.colors.length - 1;
+	const sections = nick.value.length / (colors.value.length - 1);
+	const stages = colors.value.length - 1;
 
 	for (let index = 0; index < stages; index++) {
 		const textToSend = nick.value.slice(
@@ -23,11 +22,10 @@ export default function (gradient: Pick<PrideColor, "colors">) {
 
 		out += useCalculateGradientColors(
 			textToSend,
-			gradient.colors[index],
-			gradient.colors[index + 1]
+			colors.value[index],
+			colors.value[index + 1]
 		);
 	}
 
 	nick.value = out;
-	useUpdatePreview();
 }

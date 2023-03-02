@@ -12,6 +12,18 @@ export default function (): PrideColor[] {
 			colors: ["#D60270", "#9B4F96", "#0038A8"],
 		},
 		{
+			name: "Genderfae",
+			colors: [
+				"#96c3a4",
+				"#c2deae",
+				"#f9face",
+				"#ffffff",
+				"#fca2c5",
+				"#da8ae3",
+				"#aa7edd",
+			],
+		},
+		{
 			name: "Genderqueer",
 			colors: ["#B77FDD", "#FFFFFF", "#48821E"],
 		},
@@ -33,14 +45,7 @@ export default function (): PrideColor[] {
 		},
 		{
 			name: "Rainbow",
-			colors: [
-				"#FF0018",
-				"#FFA52C",
-				"#FFFF41",
-				"#008018",
-				"#0000F9",
-				"#86007D",
-			],
+			colors: ["#FF0018", "#FFA52C", "#FFFF41", "#008018", "#0000F9", "#86007D"],
 		},
 		{
 			name: "Pastel Pride",
