@@ -127,6 +127,11 @@ export default function (): PrideColor[] {
 			repeat: false,
 		},
 		{
+			name: "Polyamory",
+			colors: ["1", "4", "e", "4", "0"],
+			repeat: false
+		},
+		{
 			name: "Queerplatonic",
 			colors: ["e", "d", "f", "7", "8"],
 			repeat: false,
@@ -170,5 +175,10 @@ export default function (): PrideColor[] {
 			name: "Vincian",
 			colors: ["2", "a", "f", "9", "1"],
 		},
+		{ name: "Transmasculine", colors: ["f", "b", "9", "8"] },
+		{ name: "Transfeminine", colors: ["f", "d", "5", "8"] },
+		{name: "Transneutral", colors: ["f", "e", "6", "8"]},
+		{ name: "Mae", colors: ["4", "6", "e", "6", "4"] },
+		{ name: "Therian", colors: ["d", "f", "0", "f", "a"]}
 	];
 }
