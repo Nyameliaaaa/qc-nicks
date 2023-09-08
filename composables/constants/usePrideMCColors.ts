@@ -162,7 +162,7 @@ export default function (): PrideColor[] {
 			repeat: false,
 		},
 		{
-			name: "Transgender",
+			name: "Trans",
 			colors: ["3", "d", "f", "d", "3"],
 			repeat: false,
 		},
@@ -175,9 +175,9 @@ export default function (): PrideColor[] {
 			name: "Vincian",
 			colors: ["2", "a", "f", "9", "1"],
 		},
-		{ name: "Transmasculine", colors: ["f", "b", "9", "8"] },
-		{ name: "Transfeminine", colors: ["f", "d", "5", "8"] },
-		{name: "Transneutral", colors: ["f", "e", "6", "8"]},
+		{ name: "Transmasc", colors: ["f", "b", "9", "8"] },
+		{ name: "Transfem", colors: ["f", "d", "5", "8"] },
+		{name: "Transneu", colors: ["f", "e", "6", "8"]},
 		{ name: "Mae", colors: ["4", "6", "e", "6", "4"] },
 		{ name: "Therian", colors: ["d", "f", "0", "f", "a"]}
 	];

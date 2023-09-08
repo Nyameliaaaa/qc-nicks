@@ -1,13 +1,12 @@
 export default function () {
 	const nick = useNick();
-	const status = useStatus();
 	const colors = useColors();
 
 	let out = "";
 	nick.value = nick.value.replace(/&([0-9a-f]|#[0-9a-f]{6})/gi, "");
 
 	if (nick.value.length < colors.value.length) {
-		status.value = "Your nickname is too short for this gradient.";
+		useUpdateModal(true, 'GradientSize', { colorLen: colors.value.length, nickLen: nick.value.length });
 		return;
 	}
 

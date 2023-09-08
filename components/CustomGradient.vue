@@ -65,7 +65,8 @@
 		</button>
 	</block>
 
-	<GradientModal @color-update="(color) => colors.push(color)" />
+	<GradientModal @color-update="(color: string) => colors.push(color)" />
+	<GradientSizeModal />
 </template>
 
 <script setup lang="ts">

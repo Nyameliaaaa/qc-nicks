@@ -55,7 +55,7 @@ export default function (): PrideColor[] {
 			name: "Trans",
 			colors: ["#55CDFC", "#F7A8B8", "#FFFFFF", "#F7A8B8", "#55CDFC"],
 		},
-		{ name: "Achillean", colors: ["#99c6ea", "#f9fdea", "#acdd4e", "#f9fdea", "#99c6ea"] },
+		{ name: "Achillean", colors: ["#99c6ea", 	"#f9fdea", "#acdd4e", "#f9fdea", "#99c6ea"] },
 		{ name: "Agender", colors: ["#000000", "#bcc4c7", "#ffffff", "#b7f684", "#ffffff", "#bcc4c7", "#000000"] },
 		{ name: "Aroace", colors: ["#e28c00", "#eccd00", "#ffffff", "#62aedc", "#203856"] },
 		{ name: "Aromantic", colors: ["#007c00", "#32cd32", "#ffffff", "#808080", "#000000"] },
@@ -65,11 +65,11 @@ export default function (): PrideColor[] {
 		{ name: "Demigenderflux", colors: ["#7b7b7b", "#c3c3c3", "#901b7b", "#f8fd73", "#ffffff", "#f8fd73", "#901b7b", "#c3c3c3", "#7b7b7b"] },
 		{ name: "Demigirl", colors: ["#7b7b7b", "#c3c3c3", "#fcacc7", "#ffffff", "#fcacc7", "#c3c3c3", "#7b7b7b"] },
 		{ name: "Diamoric", colors: ["#92f292", "#ffffff", "#650039", "#ffffff", "#92f292"] },
-		{ name: "Transfeminine", colors: ["#ffffff", "#f7abb8", "#d94585", "#2b2d2d"] },
-		{ name: "Transmasculine", colors: ["#ffffff", "#5fcdf5", "#456fb6", "#2b2d2d"] },
-		{ name: "Transneutral", colors: ["#ffffff", "#ffed22", "#e79f01", "#2b2d2d"] },
+		{ name: "Transfem", colors: ["#ffffff", "#f7abb8", "#d94585", "#2b2d2d"] },
+		{ name: "Transmasc", colors: ["#ffffff", "#5fcdf5", "#456fb6", "#2b2d2d"] },
+		{ name: "Transneu", colors: ["#ffffff", "#ffed22", "#e79f01", "#2b2d2d"] },
 		{ name: "Genderfluid", colors: ["#ff75a2", "#ffffff", "#be18d6", "#000000", "#333ebd"] },
 		{ name: "Vincian", colors: ["#078d70", "#99e8c2", "#ffffff", "#7bade3", "#3e1a78"] },
-		{ name: "Polyamory", colors: ["#0000fd", "#fd0000", "#fdfd00", "#fd0000", "#0000fd" ]}
+		{ name: "Polyamory", colors: ["#0000fd", "#fd0000", "#fdfd00", "#fd0000", "#000000" ]}
 	];
 }
