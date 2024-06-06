@@ -12,7 +12,4 @@ export default defineNuxtConfig({
 	imports: {
 		dirs: ["composables/**"],
 	},
-	app: {
-		baseURL: "/qc-nicks/",
-	},
 });
