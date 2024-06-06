@@ -22,5 +22,8 @@
 		"nuxt-icon": "^0.2.10",
 		"vue-accessible-color-picker": "^4.1.2",
 		"vue-gpickr": "^1.0.0"
+	},
+	"engines" : { 
+		"node" : ">=18.0.0 <19.0.0"
 	}
 }
