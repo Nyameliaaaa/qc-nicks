@@ -2,13 +2,13 @@ export default function () {
 	const nick = useNick();
 	const colors = useColors();
 
-	let out = "";
-	nick.value = nick.value.replace(/&([0-9a-f]|#[0-9a-f]{6})/gi, "");
-
 	if (nick.value.length < colors.value.length) {
 		useUpdateModal(true, 'GradientSize', { colorLen: colors.value.length, nickLen: nick.value.length });
 		return;
 	}
+
+	let out = "";
+	nick.value = nick.value.replace(/&([0-9a-f]|#[0-9a-f]{6})/gi, "");
 
 	const sections = nick.value.length / (colors.value.length - 1);
 	const stages = colors.value.length - 1;
