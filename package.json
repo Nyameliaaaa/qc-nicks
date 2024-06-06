@@ -1,4 +1,5 @@
 {
+	"name": "qc-nicks",
 	"private": true,
 	"scripts": {
 		"build": "nuxt build",
