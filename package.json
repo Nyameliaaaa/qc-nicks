@@ -6,7 +6,6 @@
 		"generate": "nuxt generate",
 		"preview": "nuxt preview",
 		"postinstall": "nuxt prepare",
-		"deploy": "nuxt generate && gh-pages --dotfiles -d .output/public"
 	},
 	"devDependencies": {
 		"@nuxtjs/tailwindcss": "^6.3.1",
