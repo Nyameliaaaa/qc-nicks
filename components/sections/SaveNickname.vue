@@ -26,7 +26,7 @@
 							class="text-lg font-semibold transition-all duration-500 group-hover:text-pink-500 dark:text-white"
 							size="24" />
 					</button>
-					<button class="group flex flex-row gap-1" @click="() => alert(`:3`)">
+					<button class="group flex flex-row gap-1" @click="() => navigateTo(`/saved`)">
 						<p class="text-md transition-all duration-500 group-hover:text-pink-500 dark:text-white">
 							Manage Nicknames
 						</p>

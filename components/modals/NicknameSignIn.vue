@@ -9,7 +9,8 @@
 					<div class="rounded-t-lg bg-white p-4 dark:bg-neutral-800">
 						<DialogTitle class="text-2xl font-bold dark:text-white">Sign In</DialogTitle>
 						<DialogDescription class="text-lg font-medium text-gray-800 dark:text-gray-400">
-							Nicknames are managed through Discord!
+							Nicknames are managed through Discord. Make sure to copy your nickname as continuing with
+							login will remove it.
 						</DialogDescription>
 					</div>
 					<div class="rounded-b-lg bg-slate-100 p-4 dark:bg-neutral-900">

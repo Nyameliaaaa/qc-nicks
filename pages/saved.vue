@@ -7,10 +7,12 @@
 		<Block title="Me">
 			<div class="flex flex-row justify-between items-center">
 				<div class="flex flex-row items-center gap-2">
-					<p className="dark:text-white">{{ data.user.name }}</p>
+					<img :src="data.user.image" alt="" class="rounded-full w-12 h-12">
+					<p class="dark:text-white font-bold text-lg">{{ data.user.name }}</p>
 				</div>
 				<button class="group flex flex-row gap-2" @click="() => useUpdateModal(true, `NicknameSignOut`)">
-					<p class="text-md transition-all duration-500 group-hover:text-red-500 dark:text-white">
+					<p
+						class="text-md transition-all duration-500 font-semibold group-hover:text-red-500 dark:text-white">
 						Sign Out
 					</p>
 					<icon name="material-symbols:save-outline-rounded"
@@ -19,6 +21,8 @@
 				</button>
 			</div>
 		</Block>
+
+		<Block title="Saved Nicknames"></Block>
 	</template>
 
 	<ModalsNicknameSignOut />

@@ -4,7 +4,7 @@ import DiscordProvider from "next-auth/providers/discord";
 const config = useRuntimeConfig();
 
 export default NuxtAuthHandler({
-  secret: config.clientSecret,
+  secret: config.secret,
   providers: [
     // @ts-expect-error NuxtAuth weirdness
     DiscordProvider.default({

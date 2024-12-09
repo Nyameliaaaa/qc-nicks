@@ -30,6 +30,7 @@ export default defineNuxtConfig({
     database: true,
   },
   runtimeConfig: {
+    secret: process.env.NUXT_AUTH_SECRET ?? "",
     clientId: process.env.DISCORD_CLIENT_ID ?? "",
     clientSecret: process.env.DISCORD_CLIENT_SECRET ?? "",
   },

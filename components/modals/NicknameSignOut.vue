@@ -22,10 +22,8 @@
 							<button
 								class="rounded-lg bg-red-500 p-2 font-bold transition-all duration-500 hover:bg-red-500/80 hover:shadow-lg dark:text-white"
 								@click="() => {
-									signOut();
-									useUpdateModal(false);
-								}
-									">
+									signOut({ callbackUrl: `/` }); useUpdateModal(false);
+								}">
 								Sign Out
 							</button>
 						</div>
