@@ -9,10 +9,14 @@
 		"postinstall": "nuxt prepare"
 	},
 	"devDependencies": {
+		"@nuxthub/core": "0.8.7",
 		"@nuxtjs/tailwindcss": "^6.12.2",
+		"@sidebase/nuxt-auth": "0.9.4",
+		"next-auth": "~4.21.1",
 		"nuxt": "^3.14.1592",
 		"prettier": "^2.8.8",
-		"prettier-plugin-tailwindcss": "^0.2.8"
+		"prettier-plugin-tailwindcss": "^0.2.8",
+		"wrangler": "^3.93.0"
 	},
 	"dependencies": {
 		"@headlessui/vue": "^1.7.23",

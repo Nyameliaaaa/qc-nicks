@@ -1,6 +1,5 @@
 <template>
-	<block>
-		<h2 class="text-md font-medium text-gray-800 dark:text-gray-400 mb-2">Custom Gradients</h2>
+	<block title="Custom Gradients">
 		<h3 class="text-md text-gray-800 dark:text-gray-400">Preview</h3>
 		<div class="mb-3 h-8 w-full rounded-md" :style="`background: linear-gradient(90deg, ${colors
 			.map((x) => `rgb(${useRGB(x).join(',')})`)
@@ -65,8 +64,8 @@
 		</button>
 	</block>
 
-	<GradientModal @color-update="(color: string) => colors.push(color)" />
-	<GradientSizeModal />
+	<ModalsGradient @color-update="(color: string) => colors.push(color)" />
+	<ModalsGradientSize />
 </template>
 
 <script setup lang="ts">

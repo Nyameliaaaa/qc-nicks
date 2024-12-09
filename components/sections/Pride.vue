@@ -1,7 +1,5 @@
 <template>
-	<block>
-		<h2 class="text-md font-medium text-gray-800 dark:text-gray-400">Pride</h2>
-
+	<block title="Pride">
 		<tab-group>
 			<tab-list class="grid grid-cols-1 gap-2 md:grid-cols-3">
 				<tab as="template" v-slot="{ selected }" v-for="tab in tabs" :key="tab">
@@ -14,10 +12,12 @@
 				</tab>
 			</tab-list>
 			<tab-panels>
-				<color-selection-panel @button-click="createPrideApplicator" :items="prideMCColors" :color-map="colorMap" />
-				<color-selection-panel @button-click="createPrideApplicator" :items="prideColors" :color-map="colorMap" />
-				<color-selection-panel @button-click="createGradientApplicator" :items="prideColors" :color-map="colorMap"
-					:gradient="true" />
+				<color-selection-panel @button-click="createPrideApplicator" :items="prideMCColors"
+					:color-map="colorMap" />
+				<color-selection-panel @button-click="createPrideApplicator" :items="prideColors"
+					:color-map="colorMap" />
+				<color-selection-panel @button-click="createGradientApplicator" :items="prideColors"
+					:color-map="colorMap" :gradient="true" />
 			</tab-panels>
 		</tab-group>
 	</block>
