@@ -22,7 +22,7 @@
 							<button
 								class="rounded-lg bg-red-500 p-2 font-bold transition-all duration-500 hover:bg-red-500/80 hover:shadow-lg dark:text-white"
 								@click="() => {
-									signOut({ callbackUrl: `/` }); useUpdateModal(false);
+									clear(); navigateTo('/'); useUpdateModal(false);
 								}">
 								Sign Out
 							</button>
@@ -35,9 +35,8 @@
 </template>
 
 <script setup lang="ts">
-import { ColorChangeEvent, ColorPicker } from "vue-accessible-color-picker";
 import { Dialog, DialogPanel, DialogTitle, DialogDescription } from "@headlessui/vue";
 
 const modal = useModal();
-const { signOut } = useAuth();
+const { clear } = useUserSession()
 </script>

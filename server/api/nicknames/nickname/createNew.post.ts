@@ -1,8 +1,7 @@
-import { getToken } from '#auth';
 import { tables, useDrizzle, eq, and } from '~/server/utils/drizzle';
 
 export default defineEventHandler(async event => {
-	const token = await getToken({ event });
+	const session = await getUserSession(event);
 	const body = await readBody(event);
 
 	const drizzle = useDrizzle();
@@ -10,7 +9,7 @@ export default defineEventHandler(async event => {
 		.insert(tables.nicknames)
 		.values({
 			nicknameString: body.nickname,
-			userId: token?.sub ?? '',
+			userId: session.user?.discordId ?? '',
 			createdAt: new Date()
 		})
 		.returning({

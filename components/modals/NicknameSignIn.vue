@@ -20,15 +20,10 @@
 								@click="useUpdateModal(false)">
 								Cancel
 							</button>
-							<button
-								class="rounded-lg bg-pink-500 p-2 font-bold transition-all duration-500 hover:bg-pink-500/80 hover:shadow-lg dark:text-white"
-								@click="() => {
-									signIn('discord');
-									useUpdateModal(false);
-								}
-									">
+							<a class="rounded-lg bg-pink-500 p-2 font-bold transition-all duration-500 hover:bg-pink-500/80 hover:shadow-lg dark:text-white"
+								href="/api/auth/discord">
 								Sign In
-							</button>
+							</a>
 						</div>
 					</div>
 				</DialogPanel>
@@ -38,9 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { ColorChangeEvent, ColorPicker } from "vue-accessible-color-picker";
 import { Dialog, DialogPanel, DialogTitle, DialogDescription } from "@headlessui/vue";
 
 const modal = useModal();
-const { signIn } = useAuth();
 </script>

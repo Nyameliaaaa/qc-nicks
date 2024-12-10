@@ -6,7 +6,7 @@
 			<h2 class="text-md font-medium text-gray-800 dark:text-gray-400">
 				My Saved Nicknames
 			</h2>
-			<template v-if="status === `unauthenticated`">
+			<template v-if="!loggedIn">
 				<button class="group flex flex-row gap-2" @click="logInWithDiscord">
 					<icon name="fa6-brands:discord"
 						class="text-lg font-semibold transition-all duration-500 group-hover:text-pink-500 dark:text-white"
@@ -26,14 +26,14 @@
 							{{ text }}
 						</p>
 					</button>
-					<button class="group flex flex-row gap-1" @click="() => navigateTo(`/saved`)">
+					<NuxtLink class="group flex flex-row gap-1" href="/nicknames">
 						<icon name="material-symbols:save-as-outline-rounded"
 							class="text-lg font-semibold transition-all duration-500 group-hover:text-pink-500 dark:text-white"
 							size="24" />
 						<p class="text-md transition-all duration-500 group-hover:text-pink-500 dark:text-white">
 							Manage Nicknames
 						</p>
-					</button>
+					</NuxtLink>
 				</div>
 			</template>
 		</div>
@@ -43,7 +43,7 @@
 <script setup lang="ts">
 const nick = useNick();
 const text = useState("text", () => "Save Nickname");
-const { status } = useAuth();
+const { loggedIn } = useUserSession()
 
 const logInWithDiscord = () => {
 	return useUpdateModal(true, 'NicknameSignIn');

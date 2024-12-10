@@ -1,9 +1,7 @@
-import { getToken } from '#auth';
 import { tables, useDrizzle, eq } from '~/server/utils/drizzle';
 
 export default defineEventHandler(async event => {
-	const token = await getToken({ event });
-
+	const session = await getUserSession(event);
 	const drizzle = useDrizzle();
 
 	const nicknames = await drizzle
@@ -13,7 +11,7 @@ export default defineEventHandler(async event => {
 			createdAt: tables.nicknames.createdAt
 		})
 		.from(tables.nicknames)
-		.where(eq(tables.nicknames.userId, token?.sub ?? ''));
+		.where(eq(tables.nicknames.userId, session.user?.discordId ?? ''));
 
 	return {
 		nicknames,

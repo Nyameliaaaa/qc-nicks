@@ -35,7 +35,7 @@
 
 <script setup lang="ts">
 import { TabPanel } from "@headlessui/vue";
-import type { PrideColor } from "~~/utils/types";
+import type { PrideColor } from "~/utils/types";
 const colorMap = useColorMap();
 
 defineProps<{

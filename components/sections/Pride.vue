@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import { Tab, TabGroup, TabList, TabPanels } from "@headlessui/vue";
-import type { PrideColor } from "~~/utils/types";
+import type { PrideColor } from "~/utils/types";
 
 const prideMCColors = usePrideMCColors();
 const prideColors = usePrideColors();
