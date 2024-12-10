@@ -1,4 +1,4 @@
-import { BlockMCColor } from "~~/utils/types";
+import type { BlockMCColor } from "~~/utils/types";
 
 export default function (): BlockMCColor[] {
 	return [

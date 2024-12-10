@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { BlockMCColor } from "~~/utils/types";
+import type { BlockMCColor } from "~~/utils/types";
 
 // Shared
 const blockMCColors = useBlockMCColors();

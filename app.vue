@@ -6,7 +6,6 @@
 
 	<Head>
 		<Title>Amelia's Nickname Helper :D</Title>
-		<link rel="preload" href="https://qc-nick-saver.nightlake.workers.dev" />
 	</Head>
 
 	<Body class="bg-slate-100 font-sans dark:bg-neutral-900">
@@ -51,7 +50,7 @@
 
 <script setup lang="ts">
 import "@/assets/css/tailwind.css";
-import { PrideColor } from "./utils/types";
+import type { PrideColor } from "./utils/types";
 import { Switch } from "@headlessui/vue";
 const colorMode = useColorMode();
 const modal = useModal();
@@ -68,7 +67,7 @@ onMounted(() => {
 	randomGradient.value = all[Math.floor(Math.random() * all.length)];
 });
 
-const getGradient = (colors: array[]) => {
+const getGradient = (colors: string[]) => {
 	return `background: linear-gradient(90deg, ${colors
 		.map((x, index) => {
 			const color = useRGB(x).join(",");

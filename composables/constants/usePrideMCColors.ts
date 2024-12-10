@@ -1,4 +1,4 @@
-import { PrideColor } from "~~/utils/types";
+import type { PrideColor } from "~~/utils/types";
 
 export default function (): PrideColor[] {
 	return [

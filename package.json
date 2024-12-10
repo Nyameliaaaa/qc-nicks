@@ -6,12 +6,14 @@
 		"dev": "nuxt dev",
 		"generate": "nuxt generate",
 		"preview": "nuxt preview",
-		"postinstall": "nuxt prepare"
+		"postinstall": "nuxt prepare",
+		"db:generate": "drizzle-kit generate"
 	},
 	"devDependencies": {
 		"@nuxthub/core": "0.8.7",
 		"@nuxtjs/tailwindcss": "^6.12.2",
 		"@sidebase/nuxt-auth": "0.9.4",
+		"drizzle-kit": "^0.30.0",
 		"next-auth": "~4.21.1",
 		"nuxt": "^3.14.1592",
 		"prettier": "^2.8.8",
@@ -22,6 +24,7 @@
 		"@headlessui/vue": "^1.7.23",
 		"@nuxtjs/color-mode": "^3.5.2",
 		"@tailwindcss/forms": "^0.5.9",
+		"drizzle-orm": "^0.38.0",
 		"gh-pages": "^5.0.0",
 		"nuxt-icon": "^0.2.11",
 		"vue-accessible-color-picker": "^4.1.4",
