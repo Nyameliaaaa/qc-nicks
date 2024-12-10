@@ -1,9 +1,9 @@
-import { getServerSession } from '#auth';
+import { getToken } from '#auth';
 
 export default eventHandler(async event => {
-	const session = await getServerSession(event);
+	const token = await getToken({ event });
 
-	if (!session) {
+	if (!token) {
 		throw createError({
 			statusMessage:
 				'You are not permitted to access this resource. Please authenticate over Oauth2 and try again.',
