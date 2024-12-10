@@ -21,7 +21,7 @@ export default defineEventHandler(async event => {
 			const newNicks: {
 				nicknameId: number;
 				nickname: string;
-				createdAt: numbr;
+				createdAt: number;
 			}[] = [];
 
 			nicknames.forEach(({ createdAt, nickname, nicknameId }) => {

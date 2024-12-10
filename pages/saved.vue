@@ -82,16 +82,13 @@
 </template>
 
 <script setup lang="ts">
-const { status, data } = useAuth();
+definePageMeta({
+	middleware: 'auth'
+});
+
+const { data } = useAuth();
 const nick = useNick();
 const preview = usePreview();
-
-
-onMounted(() => {
-	if (status.value === "unauthenticated") {
-		navigateTo("/");
-	}
-});
 
 const { data: nicknameData, error, status: fetchStatus, refresh } = await useFetch('/api/nicknames/@me');
 
@@ -102,7 +99,7 @@ const applyNickname = (nickname: string) => {
 }
 
 const deleteNickname = async (nicknameId: number) => {
-	const { data: mutateData, error: mutateError, status: mutateStatus } = await $fetch(
+	await $fetch(
 		`/api/nicknames/nickname/${nicknameId}`,
 		{
 			method: "delete",

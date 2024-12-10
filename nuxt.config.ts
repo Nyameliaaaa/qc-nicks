@@ -30,6 +30,7 @@ export default defineNuxtConfig({
       defaultProvider: "discord",
       addDefaultCallbackUrl: true,
     },
+    globalAppMiddleware: false,
   },
 
   hub: {
