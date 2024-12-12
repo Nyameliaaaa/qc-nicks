@@ -38,7 +38,7 @@
 						</div>
 					</div>
 					<IconButton text="Sign Out" icon-name="material-symbols:logout" destructive
-						@click="useUpdateModal(true, 'nicknameSignOut')" />
+						@click="() => useUpdateModal(true, 'nicknameSignOut')" />
 				</div>
 			</template>
 		</Block>
