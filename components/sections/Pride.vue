@@ -1,12 +1,13 @@
 <template>
 	<block title="Pride">
 		<tab-group>
-			<tab-list class="grid grid-cols-1 gap-2 md:grid-cols-3">
+			<tab-list class="my-2 grid grid-cols-1 gap-2 md:grid-cols-3">
 				<tab as="template" v-slot="{ selected }" v-for="tab in tabs" :key="tab">
-					<div class="cursor-pointer rounded-md p-2 text-center transition-all duration-500 hover:bg-white dark:text-white hover:dark:bg-neutral-700"
-						:class="{
-							'font-semibold dark:bg-neutral-700/70': selected,
-						}">
+					<div class="cursor-pointer rounded-md p-2 text-center transition-all duration-500" :class="{
+						'font-semibold text-pink bg-surface0': selected,
+						'text-subtext0': !selected,
+						'hover:text-text hover:bg-base': !selected || selected
+					}">
 						{{ tab }}
 					</div>
 				</tab>

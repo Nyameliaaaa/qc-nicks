@@ -8,12 +8,12 @@
 		<Title>Amelia's Nickname Helper :D</Title>
 	</Head>
 
-	<Body class="bg-slate-100 font-sans dark:bg-neutral-900">
-		<div v-if="!randomGradient" class="h-4 w-full bg-white dark:bg-neutral-800"></div>
+	<Body class="latte dark:macchiato bg-crust text-text h-[100vh]">
+		<div v-if="!randomGradient" class="h-4 w-full bg-mantle"></div>
 		<div v-if="randomGradient" class="h-4 w-full" :style="getGradient(randomGradient.colors)"></div>
-		<div class="mx-auto max-w-5xl p-2" :class="modal ? `overflow-clip` : `overflow-x-clip`">
-			<h1 class="mb-2 text-center text-4xl font-bold dark:text-white">
-				<span class="font-extrabold text-pink-500">Amelia</span>'s Nickname Helper
+		<div class="mx-auto max-w-5xl p-2" :class="modal ? `overflow-clip` : `overflow-x-scroll`">
+			<h1 class="mb-2 text-center text-4xl font-bold">
+				<span class="font-extrabold text-pink">Amelia</span>'s Nickname Helper
 			</h1>
 
 			<nuxt-page />
@@ -22,21 +22,21 @@
 
 			<block>
 				<div class="flex items-center justify-between">
-					<p class="text-center font-semibold dark:text-white">
+					<p class="text-center font-semibold">
 						Made with ❤️ by Amelia.
 					</p>
-					<Switch v-model="vModel" @update:model-value="updatePref" :class="$colorMode.preference === 'dark' ? 'bg-pink-600' : 'bg-neutral-800'
+					<Switch v-model="vModel" @update:model-value="updatePref" :class="$colorMode.preference === 'dark' ? 'bg-pink' : 'bg-text dark:bg-base'
 						" class="relative inline-flex h-8 w-14 items-center rounded-full">
 						<span class="sr-only">Theme</span>
 						<span :class="$colorMode.preference === 'dark'
 							? 'translate-x-7'
 							: 'translate-x-1'
-							" class="inline-block h-6 w-6 transform items-center rounded-full bg-white transition">
+							" class="inline-block h-6 w-6 transform items-center rounded-full bg-mantle dark:bg-text transition">
 							<div class="flex h-full w-full items-center justify-center">
 								<Icon :name="colorMode.preference === 'dark'
 									? 'material-symbols:dark-mode-rounded'
 									: 'material-symbols:light-mode'
-									" class="text-lg font-semibold text-black transition-all duration-500 group-hover:text-pink-500" size="20" />
+									" class="text-lg font-semibold text-text dark:text-mantle transition-all duration-500" size="20" />
 							</div>
 						</span>
 					</Switch>

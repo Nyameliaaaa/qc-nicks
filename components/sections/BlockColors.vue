@@ -1,15 +1,9 @@
 <template>
 	<block>
 		<div class="flex flex-row justify-between">
-			<h2 class="text-md font-medium text-gray-800 dark:text-gray-400">Colors</h2>
-			<button class="group flex flex-row gap-2" @click="useUpdateModal(true, 'BlockColors')">
-				<p class="text-md transition-all duration-500 group-hover:text-pink-500 dark:text-white">
-					Add your own?
-				</p>
-				<icon name="material-symbols:add-circle-outline-rounded"
-					class="text-lg font-semibold transition-all duration-500 group-hover:text-pink-500 dark:text-white"
-					size="24" />
-			</button>
+			<h2 class="text-md font-medium text-subtext1">Colors</h2>
+			<IconButton text="Add your own?" icon-name="material-symbols:add-circle-outline-rounded"
+				@click="useUpdateModal(true, 'BlockColors')" />
 		</div>
 		<div class="grid grid-cols-2 md:grid-cols-6">
 			<button v-for="color in blockMCColors" :key="color.colorName"

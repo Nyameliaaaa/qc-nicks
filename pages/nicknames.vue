@@ -1,75 +1,95 @@
 <template>
-	<p class="mb-4 text-lg dark:text-white">
-		Your saved nicknames are shown below.
+	<p class="mb-4 text-lg">
+		Your saved nicknames are shown below. Please keep in mind that Amelia can see them, so don't get too.. you
+		know.. personal.
 	</p>
 
 	<NuxtLink class="group flex flex-row gap-2 items-center" to="/">
 		<icon name="material-symbols:arrow-back-2-outline-rounded"
-			class="font-semibold transition-all duration-500 group-hover:text-pink-500 dark:text-white" size="24" />
-		<p class="transition-all duration-500 font-semibold group-hover:text-pink-500 dark:text-white">
+			class="font-semibold transition-all duration-500 group-hover:text-pink" size="24" />
+		<p class="transition-all duration-500 font-semibold group-hover:text-pink">
 			Go Back Home
 		</p>
 	</NuxtLink>
+
 	<template v-if="discordData">
 		<Block title="Me">
-			<div class="flex flex-row justify-between items-center">
-				<div class="flex flex-row items-center gap-2">
-					<img :src="discordData.avatar" alt="" class="rounded-full w-16 h-16">
-					<div>
-						<p class="dark:text-white font-bold text-lg">{{ discordData.name }}</p>
-						<p class="text-gray-800 dark:text-gray-400 font-semibold text-sm">{{ discordData.username }}</p>
+			<template v-if="discordStatus === 'pending'">
+				<div class="flex flex-row justify-between items-center mt-2">
+					<div class="flex flex-row items-center gap-2">
+						<img :src="`https://cdn.discordapp.com/embed/avatars/5.png`" alt=""
+							class="rounded-full w-16 h-16">
+						<div>
+							<p class="font-semibold text-lg">Madeline Celeste</p>
+							<p class="text-subtext0 font-medium text-sm">@mountceleste</p>
+						</div>
 					</div>
+					<IconButton text="Sign Out" icon-name="material-symbols:logout" destructive
+						@click="useUpdateModal(true, 'nicknameSignOut')" />
 				</div>
-				<button class="group flex flex-row gap-2" @click="() => useUpdateModal(true, `NicknameSignOut`)">
-					<icon name="material-symbols:logout"
-						class="text-lg font-semibold transition-all duration-500 group-hover:text-red-500 dark:text-white"
-						size="24" />
-					<p
-						class="text-md transition-all duration-500 font-semibold group-hover:text-red-500 dark:text-white">
-						Sign Out
-					</p>
-				</button>
-			</div>
+			</template>
+			<template v-if="discordStatus === 'success' && discordData">
+				<div class="flex flex-row justify-between items-center mt-2">
+					<div class="flex flex-row items-center gap-2">
+						<img :src="discordData.avatar" alt="" class="rounded-full w-16 h-16">
+						<div>
+							<p class="font-semibold text-lg">{{ discordData.name }}</p>
+							<p class="text-subtext0 font-medium text-sm">@{{ discordData.username }}</p>
+						</div>
+					</div>
+					<IconButton text="Sign Out" icon-name="material-symbols:logout" destructive
+						@click="useUpdateModal(true, 'nicknameSignOut')" />
+				</div>
+			</template>
 		</Block>
 	</template>
 	<Block title="Saved Nicknames">
 		<template v-if="nicknameStatus === `pending`">
 			<div class="flex flex-row justify-center">
-				<p class="dark:text-white">Loading Nicknames :3</p>
+				<div class="group flex flex-row gap-2 transition-all duration-500 items-center">
+					<Icon name="material-symbols:error-outline-rounded" class="transition-all duration-500 text-text"
+						size="36" />
+					<p class="transition-all duration-500 text-lg text-text font-semibold">
+						Loading nicknames :3
+					</p>
+				</div>
+			</div>
+		</template>
+		<template v-if="nicknameStatus === `error`">
+			<div class="group flex flex-row gap-2 transition-all duration-500 items-center">
+				<Icon name="material-symbols:error-outline-rounded" class="transition-all duration-500 text-text"
+					size="36" />
+				<p class="transition-all duration-500 text-lg text-text font-semibold">
+					Something went wrong!
+				</p>
 			</div>
 		</template>
 		<template v-if="nicknameStatus === `success` && nicknameData">
-			<ul class="flex flex-col divide-y-2 dark:divide-neutral-700">
+			<div v-if="!nicknameData.nicknames.length" class="flex flex-row justify-center">
+				<div class="group flex flex-row gap-2 transition-all duration-500 items-center">
+					<Icon name="material-symbols:error-outline-rounded" class="transition-all duration-500 text-text"
+						size="36" />
+					<p class="transition-all duration-500 text-lg text-text font-semibold">
+						You do not have any nicknames saved!
+					</p>
+				</div>
+			</div>
+			<ul v-else class="flex flex-col mt-2 gap-2">
 				<template v-for="nickname in nicknameData.nicknames" :key="nickname.nicknameId">
-					<li class="font-bold text-white">
-						<div class="rounded-md py-2 px-4 dark:bg-neutral-900 mb-2">
+					<li class="">
+						<div class="rounded-md py-2 px-4 bg-crust text-white mb-2">
 							<span v-for="section in usePreviewPrepare(nickname.nickname)"
 								:style="`color: ${section.color};font-family: Minecraft;`"
 								class="text-3xl drop-shadow-md">
 								{{ section.text }}
 							</span>
 						</div>
-						<div class="flex flex-row items-center gap-4">
-							<button class="group flex flex-row gap-2 items-center"
-								@click="() => applyNickname(nickname.nickname)">
-								<icon name="material-symbols:save-outline-rounded"
-									class="font-semibold transition-all duration-500 group-hover:text-pink-500 dark:text-white"
-									size="24" />
-								<p
-									class="transition-all duration-500 font-semibold group-hover:text-pink-500 dark:text-white">
-									Apply Nickname
-								</p>
-							</button>
-							<button class="group flex flex-row gap-2 items-center"
-								@click="() => deleteNickname(nickname.nicknameId)">
-								<icon name="material-symbols:delete-forever-outline-rounded"
-									class="font-semibold transition-all duration-500 group-hover:text-red-500 dark:text-white"
-									size="24" />
-								<p
-									class="transition-all duration-500 font-semibold group-hover:text-red-500 dark:text-white">
-									Delete Nickname
-								</p>
-							</button>
+						<div class="flex flex-row items-center gap-2 md:gap-4">
+							<IconButton text="Apply Nickname" icon-name="material-symbols:save-outline-rounded"
+								@click="applyNickname(nickname.nickname)" />
+							<IconButton text="Delete Nickname"
+								icon-name="material-symbols:delete-forever-outline-rounded"
+								@click="deleteNickname(nickname.nicknameId)" destructive />
 						</div>
 					</li>
 				</template>
@@ -84,7 +104,7 @@
 const nick = useNick();
 const preview = usePreview();
 
-const { data: discordData } = await useFetch('/api/@me');
+const { data: discordData, status: discordStatus } = await useFetch('/api/@me');
 const { data: nicknameData, status: nicknameStatus, refresh: nicknameRefresh } = await useFetch('/api/nicknames/@me');
 
 const applyNickname = (nickname: string) => {

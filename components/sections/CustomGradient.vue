@@ -1,71 +1,66 @@
 <template>
 	<block title="Custom Gradients">
-		<h3 class="text-md text-gray-800 dark:text-gray-400">Preview</h3>
-		<div class="mb-3 h-8 w-full rounded-md" :style="`background: linear-gradient(90deg, ${colors
-			.map((x) => `rgb(${useRGB(x).join(',')})`)
-			.join(',')});`"></div>
+		<div class="mt-2 mb-4">
+			<h3 class="text-md text-subtext0 mb-1">Preview</h3>
+			<div class="h-8 w-full rounded-md" :style="`background: linear-gradient(90deg, ${colors
+				.map((x) => `rgb(${useRGB(x).join(',')})`)
+				.join(',')});`"></div>
+		</div>
 
-		<div class="mt-3 flex flex-row items-center justify-between">
-			<h3 class="text-md text-gray-800 dark:text-gray-400">Colors</h3>
-			<button class="group flex flex-row gap-2" @click="useUpdateModal(true, 'CustomGradient')">
-				<p class="text-md transition-all duration-500 group-hover:text-pink-500 dark:text-white">
-					Add Color
-				</p>
-				<icon name="material-symbols:add-circle-outline-rounded"
-					class="text-lg font-semibold transition-all duration-500 group-hover:text-pink-500 dark:text-white"
-					size="24" />
-			</button>
+		<div class="mb-1 flex flex-row items-center justify-between">
+			<h3 class="text-md text-subtext0">Colors</h3>
+			<IconButton text="Add Color" icon-name="material-symbols:add-circle-outline-rounded"
+				@click="useUpdateModal(true, 'CustomGradient')" />
 		</div>
 
 		<template v-for="(gradient, index) in colors" :key="index">
 			<div
-				class="my-2 flex flex-col justify-between gap-2 rounded-lg bg-slate-200 p-2 dark:bg-neutral-900 md:flex-row md:items-center md:gap-0">
+				class="my-2 flex flex-col justify-between gap-2 rounded-lg p-2 bg-base md:flex-row md:items-center md:gap-0">
 				<div class="flex flex-row items-center gap-2">
 					<div class="h-8 w-8 rounded-full" :style="`background: ${gradient}`"></div>
-					<p class="dark:text-white">
+					<p>
 						{{ gradient }}
 					</p>
 				</div>
 				<div class="flex flex-row items-center justify-between gap-2 md:justify-end">
 					<button class="group" @click="() => moveItem(colors, index, index - 1)" :disabled="index === 0">
-						<icon name="bx:chevron-up" class="text-lg font-semibold transition-all duration-500" size="36"
-							:class="index === 0
-								? `cursor-not-allowed text-gray-800 dark:text-gray-400`
-								: `cursor-pointer group-hover:text-pink-500 dark:text-white`
+						<icon name="material-symbols:arrow-upward-rounded"
+							class="text-subtext0 transition-all duration-500" size="28" :class="index === 0
+								? `cursor-not-allowed text-subtext1`
+								: `cursor-pointer group-hover:text-pink`
 								" />
 					</button>
 					<button class="group" @click="() => moveItem(colors, index, index + 1)"
 						:disabled="index === colors.length - 1">
-						<icon name="bx:chevron-down" class="text-lg font-semibold transition-all duration-500" size="36"
-							:class="index === colors.length - 1
-								? `cursor-not-allowed text-gray-800 dark:text-gray-400`
-								: `cursor-pointer group-hover:text-pink-500 dark:text-white`
+						<icon name="material-symbols:arrow-downward-rounded"
+							class="text-subtext0 transition-all duration-500" size="28" :class="index === colors.length - 1
+								? `cursor-not-allowed text-subtext1`
+								: `cursor-pointer group-hover:text-pink`
 								" />
 					</button>
 					<button @click="removeGradient({ gradient, index })" class="group" :disabled="colors.length === 2">
-						<icon name="material-symbols:delete-outline-rounded" :class="colors.length === 2
-							? `cursor-not-allowed text-gray-800 dark:text-gray-400`
-							: `cursor-pointer group-hover:text-pink-500 dark:text-white`
-							" size="24" />
+						<icon name="material-symbols:delete-outline-rounded"
+							class="text-subtext0 transition-all duration-500" :class="colors.length === 2
+								? `cursor-not-allowed text-subtext1`
+								: `cursor-pointer group-hover:text-red`
+								" size="28" />
 					</button>
 				</div>
 			</div>
 		</template>
 
 		<button
-			class="group mt-3 flex flex-row gap-2 rounded-lg bg-white p-2 font-semibold transition-all duration-500 hover:bg-slate-200/60 hover:shadow-lg dark:bg-neutral-900 dark:text-white hover:dark:bg-neutral-700"
+			class="group mt-3 p-2 flex flex-row gap-2 transition-all duration-500 rounded-lg bg-base hover:bg-surface0"
 			@click="useUpdateGradient()">
 			<icon name="material-symbols:add-circle-outline-rounded"
-				class="text-lg font-semibold transition-all duration-500 group-hover:text-pink-500 dark:text-white"
-				size="24" />
-			<p class="text-md transition-all duration-500 group-hover:text-pink-500 dark:text-white">
+				class="transition-all duration-500 group-hover:text-pink" size="24" />
+			<p class="text-md font-semibold transition-all duration-500 group-hover:text-pink">
 				Apply Gradient
 			</p>
 		</button>
 	</block>
 
 	<ModalsGradient @color-update="(color: string) => colors.push(color)" />
-	<ModalsGradientSize />
 </template>
 
 <script setup lang="ts">

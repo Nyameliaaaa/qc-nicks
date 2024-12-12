@@ -1,5 +1,5 @@
 <template>
-	<p class="mb-4 text-lg dark:text-white">
+	<p class="mb-4 text-lg text-subtext0">
 		Type the name you want in the <code>Nickname</code> field, see it in the
 		<code>Preview</code>.
 		<br />
@@ -23,11 +23,13 @@
 
 	<div class="h-4"></div>
 
-	<block>
+	<block title=":3">
 		<textarea
-			class="mt-0 block w-full border-0 border-b-2 border-black bg-white px-0.5 transition-all duration-500 focus:border-pink-600 focus:ring-0 dark:border-gray-200 dark:bg-neutral-800 dark:text-white dark:focus:border-pink-500"
+			class="block w-full my-2 p-2 bg-base focus:bg-surface0 rounded-md transition-all duration-500 focus:ring-2 focus:ring-pink font-semibold font-mono"
 			placeholder="holy fucking bingle. what!? - use this area to make longer names." />
 	</block>
+
+	<ModalsNickSizeTooShort />
 </template>
 
 <script setup lang="ts">

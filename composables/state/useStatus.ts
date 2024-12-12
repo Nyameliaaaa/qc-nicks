@@ -1,3 +1,3 @@
 export default function () {
-	return useState("status", () => "");
+	return useState('status', () => 'Nickname is OK');
 }

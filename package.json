@@ -10,6 +10,7 @@
 		"db:generate": "drizzle-kit generate"
 	},
 	"devDependencies": {
+		"@catppuccin/tailwindcss": "^0.1.6",
 		"@nuxthub/core": "0.8.7",
 		"@nuxtjs/tailwindcss": "^6.12.2",
 		"drizzle-kit": "^0.30.0",

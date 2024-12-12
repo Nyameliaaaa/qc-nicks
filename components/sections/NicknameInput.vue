@@ -1,17 +1,15 @@
 <template>
-	<block>
+	<Block title="Nickname">
 		<label class="block">
-			<h2 class="text-md font-medium text-zinc-700 dark:text-gray-400">Nickname</h2>
-			<input
-				type="text"
-				class="mt-0 block w-full border-0 border-b-2 border-black bg-white px-0.5 transition-all duration-500 focus:border-pink-600 focus:ring-0 dark:border-gray-200 dark:bg-neutral-800 dark:text-white dark:focus:border-pink-500"
-				v-model="nick"
-				@input.prevent="updateNick"
-			/>
+			<input type="text"
+				class="block w-full my-2 p-2 bg-base focus:bg-surface0 rounded-md transition-all duration-500 outline-none focus:ring-2 focus:ring-pink font-semibold font-mono"
+				:class="{
+					'ring-2 ring-red': status !== 'Nickname is OK'
+				}" v-model="nick" @input.prevent="updateNick" />
 		</label>
 
-		<p class="mt-2 text-gray-800 dark:text-gray-400">{{ status }}</p>
-	</block>
+		<p class="mt-2 text-subtext0">{{ status }}</p>
+	</Block>
 </template>
 
 <script setup lang="ts">

@@ -4,30 +4,43 @@ export default function () {
 
 	const { macro, repeat } = macroState.value;
 
-	nick.value = nick.value
-		.replaceAll(/&([A-Fr0-9]|#[0-9A-F]{6})/gi, "")
-		.replaceAll("&#", "");
+	if (nick.value.length < macro.length) {
+		useUpdateModal<{ nickLen: number; colorLen: number; objType: string }>(
+			true,
+			'NickSizeTooLong',
+			{
+				colorLen: macro.length,
+				nickLen: nick.value.length,
+				objType: 'macro'
+			}
+		);
+		return;
+	}
 
-	let out = "";
-	const colorPattern = macro.includes("#")
+	nick.value = nick.value
+		.replaceAll(/&([A-Fr0-9]|#[0-9A-F]{6})/gi, '')
+		.replaceAll('&#', '');
+
+	let out = '';
+	const colorPattern = macro.includes('#')
 		? macro
 				.slice(1)
-				.split("#")
-				.map((color) => `#${color}`)
-		: macro.split("");
+				.split('#')
+				.map(color => `#${color}`)
+		: macro.split('');
 
-	if (!macro || macro === "") {
+	if (!macro || macro === '') {
 		return;
 	}
 
 	if (repeat) {
-		const inputChunk = useArraySplitting(nick.value.split(""), 2);
+		const inputChunk = useArraySplitting(nick.value.split(''), 2);
 
 		out = inputChunk
 			.map(
 				(chunk, index) => `&${colorPattern[index % colorPattern.length]}${chunk}`
 			)
-			.join("");
+			.join('');
 	} else {
 		let charAmount = nick.value.length / colorPattern.length;
 

@@ -6,8 +6,8 @@
 					<button @click="$emit('button-click', item)"
 						class="relative isolate m-2 rounded-md transition-all duration-500"
 						:style="generateNonGradientStyle(item.colors)">
-						<div class="absolute -z-10 h-full w-full rounded-md bg-black/30"></div>
-						<p class="text-shadow-lg p-3 font-semibold text-white shadow-black">
+						<div class="absolute -z-10 h-full w-full rounded-md bg-mantle/30"></div>
+						<p class="text-shadow-lg p-3 font-semibold text-white shadow-manl">
 							{{ item.name }}
 						</p>
 					</button>
@@ -17,9 +17,8 @@
 			<!-- if we do -->
 			<template v-if="gradient">
 				<template v-for="item in sort(items)" :key="item.name">
-					<button @click="$emit('button-click', item)" :style="`background: linear-gradient(90deg, ${item.colors
-						.map((x) => `rgb(${useRGB(x).join(',')})`)
-						.join(',')});`" class="relative isolate m-2 rounded-md transition-all duration-500 hover:drop-shadow-xl">
+					<button @click="$emit('button-click', item)" :style="generateGradientStyle(item.colors)"
+						class="relative isolate m-2 rounded-md transition-all duration-500 hover:drop-shadow-xl">
 						<div class="absolute -z-10 h-full w-full rounded-md bg-black/30"></div>
 						<div class="p-3">
 							<p class="text-shadow-lg font-semibold text-white shadow-black">
@@ -60,6 +59,12 @@ const generateNonGradientStyle = (colors: string[]) => {
 		})
 		.join(",")});`;
 };
+
+const generateGradientStyle = (colors: string[]) => {
+	return `background: linear-gradient(90deg, ${colors
+		.map((x) => `rgb(${useRGB(x).join(',')})`)
+		.join(',')});`
+}
 
 const sort = (thing: PrideColor[]) => thing.sort((a, b) => {
 	if (a.name < b.name) {
