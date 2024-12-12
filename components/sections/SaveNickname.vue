@@ -35,7 +35,7 @@
 const nick = useNick();
 const saveNicknameButtonState = useState("saveNicknameButtonState", () => { return { text: "Save Nickname", icon: "material-symbols:save-outline-rounded" } });
 const { loggedIn } = useUserSession();
-const buttonClass = "group mt-2 flex flex-row gap-1 bg-base hover:bg-surface0 w-1/2 p-2 rounded-md md:mt-0 md:bg-transparent md:hover:bg-transparent md:w-fit md:p-0 md:rounded-none";
+const buttonClass = "group mt-2 flex flex-row gap-1 bg-base hover:bg-surface0 w-1/2 p-2 rounded-md h-fill md:mt-0 md:bg-transparent md:hover:bg-transparent md:w-fit md:p-0 md:rounded-none";
 
 const logInWithDiscord = () => {
 	return useUpdateModal(true, 'NicknameSignIn');
