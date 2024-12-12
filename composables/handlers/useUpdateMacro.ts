@@ -3,20 +3,7 @@ export default function () {
 	const nick = useNick();
 
 	const { macro, repeat } = macroState.value;
-
-	if (nick.value.length < macro.length) {
-		useUpdateModal<{ nickLen: number; colorLen: number; objType: string }>(
-			true,
-			'NickSizeTooLong',
-			{
-				colorLen: macro.length,
-				nickLen: nick.value.length,
-				objType: 'macro'
-			}
-		);
-		return;
-	}
-
+		
 	nick.value = nick.value
 		.replaceAll(/&([A-Fr0-9]|#[0-9A-F]{6})/gi, '')
 		.replaceAll('&#', '');
@@ -30,6 +17,19 @@ export default function () {
 		: macro.split('');
 
 	if (!macro || macro === '') {
+		return;
+	}
+
+	if (nick.value.length < colorPattern.length) {
+		useUpdateModal<{ nickLen: number; colorLen: number; objType: string }>(
+			true,
+			'NickSizeTooShort',
+			{
+				colorLen: macro.length,
+				nickLen: nick.value.length,
+				objType: 'macro'
+			}
+		);
 		return;
 	}
 

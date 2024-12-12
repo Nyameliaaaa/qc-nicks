@@ -14,18 +14,17 @@
 
 	<template v-if="discordData">
 		<Block title="Me">
-			<template v-if="discordStatus === 'pending'">
+			<template v-if="discordStatus === 'pending' || discordStatus === 'error'">
 				<div class="flex flex-row justify-between items-center mt-2">
 					<div class="flex flex-row items-center gap-2">
-						<img :src="`https://cdn.discordapp.com/embed/avatars/5.png`" alt=""
-							class="rounded-full w-16 h-16">
+						<img :src="`https://cdn.di
+						scordapp.com/embed/avatars/5.png`" alt="" class="rounded-full w-16 h-16">
 						<div>
 							<p class="font-semibold text-lg">Madeline Celeste</p>
 							<p class="text-subtext0 font-medium text-sm">@mountceleste</p>
 						</div>
 					</div>
-					<IconButton text="Sign Out" icon-name="material-symbols:logout" destructive
-						@click="useUpdateModal(true, 'nicknameSignOut')" />
+					<IconButton text="Sign Out" icon-name="material-symbols:logout" destructive />
 				</div>
 			</template>
 			<template v-if="discordStatus === 'success' && discordData">
@@ -38,7 +37,7 @@
 						</div>
 					</div>
 					<IconButton text="Sign Out" icon-name="material-symbols:logout" destructive
-						@click="() => useUpdateModal(true, 'nicknameSignOut')" />
+						@click="useUpdateModal(true, 'NicknameSignOut')" />
 				</div>
 			</template>
 		</Block>

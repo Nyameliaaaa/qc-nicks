@@ -25,7 +25,7 @@
 					<p class="text-center font-semibold">
 						Made with ❤️ by Amelia.
 					</p>
-					<Switch v-model="vModel" @update:model-value="updatePref" :class="$colorMode.preference === 'dark' ? 'bg-pink' : 'bg-text dark:bg-base'
+					<Switch v-model="isDark" @update:model-value="updatePref" :class="$colorMode.preference === 'dark' ? 'bg-pink' : 'bg-text dark:bg-base'
 						" class="relative inline-flex h-8 w-14 items-center rounded-full">
 						<span class="sr-only">Theme</span>
 						<span :class="$colorMode.preference === 'dark'
@@ -60,7 +60,7 @@ const updatePref = () => {
 	colorMode.preference = colorMode.preference === "dark" ? "light" : "dark";
 };
 
-const vModel = colorMode.preference === "dark";
+let isDark = colorMode.preference === "dark";
 
 onMounted(() => {
 	const all = [...usePrideColors()];

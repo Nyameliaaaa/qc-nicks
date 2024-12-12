@@ -1,5 +1,5 @@
 export default function () {
-	return useState("nick", () => {
-		return "Queercraft";
+	return useState('nick', () => {
+		return '';
 	});
 }

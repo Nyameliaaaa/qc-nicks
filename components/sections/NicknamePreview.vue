@@ -18,6 +18,6 @@ const nick = useNick();
 const preview = usePreview();
 
 watch(nick, (newNick) => {
-	preview.value = usePreviewPrepare(nick.value);
+	preview.value = usePreviewPrepare(newNick.value ?? '<3');
 });
 </script>

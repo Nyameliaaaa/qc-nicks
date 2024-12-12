@@ -13,11 +13,11 @@
 				</div>
 				<div class="mt-2 flex flex-row gap-2">
 					<Switch v-model="macroState.repeat" @update:model-value="useUpdateMacro"
-						:class="macroState.repeat ? 'bg-pink' : 'bg-base'"
+						:class="macroState.repeat ? 'bg-pink' : 'bg-text dark:bg-base'"
 						class="relative inline-flex h-6 w-11 items-center rounded-full">
 						<span class="sr-only">Repeat</span>
 						<span class="inline-block h-4 w-4 transform rounded-full transition-all duration-300"
-							:class="macroState.repeat ? 'bg-mantle translate-x-6' : 'bg-pink translate-x-1'" />
+							:class="macroState.repeat ? 'bg-mantle translate-x-6' : 'bg-mantle translate-x-1'" />
 					</Switch>
 					<p class="text-md font-semibold">Repeat</p>
 				</div>
