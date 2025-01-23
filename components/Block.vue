@@ -1,8 +1,11 @@
 <template>
 	<div class="my-2 rounded-xl p-3 md:p-4 bg-mantle">
-		<template v-if="title">
-			<h2 class="text-md font-medium text-subtext1">{{ title }}</h2>
-		</template>
+		<div class="flex flex-row justify-between">
+			<template v-if="title">
+				<h2 class="text-md font-medium text-subtext1">{{ title }}</h2>
+			</template>
+			<slot name="button" />
+		</div>
 		<slot />
 	</div>
 </template>

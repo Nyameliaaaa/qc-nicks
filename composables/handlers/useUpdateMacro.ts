@@ -3,7 +3,7 @@ export default function () {
 	const nick = useNick();
 
 	const { macro, repeat } = macroState.value;
-		
+
 	nick.value = nick.value
 		.replaceAll(/&([A-Fr0-9]|#[0-9A-F]{6})/gi, '')
 		.replaceAll('&#', '');
@@ -25,7 +25,7 @@ export default function () {
 			true,
 			'NickSizeTooShort',
 			{
-				colorLen: macro.length,
+				colorLen: colorPattern.length,
 				nickLen: nick.value.length,
 				objType: 'macro'
 			}

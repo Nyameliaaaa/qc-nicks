@@ -1,13 +1,11 @@
 <template>
-	<block>
-		<div class="flex flex-row justify-between">
-			<h2 class="text-md font-medium text-subtext1">Command</h2>
+	<block slot="Command">
+		<template #button>
 			<IconButton :text="justCopied ? `Copied!` : `Copy Command`"
 				icon-name="material-symbols:content-copy-outline-rounded" @click="copyCommand" />
-		</div>
-		<code class="w-full text-lg font-bold [word-break:_break-all]">
-			/nick {{ nick }}
-		</code>
+		</template>
+
+		<code class="w-full text-lg font-bold [word-break:_break-all]">/nick {{ nick }}</code>
 	</block>
 </template>
 

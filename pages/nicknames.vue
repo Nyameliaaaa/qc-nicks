@@ -1,7 +1,6 @@
 <template>
 	<p class="mb-4 text-lg">
-		Your saved nicknames are shown below. Please keep in mind that Amelia can see them, so don't get too.. you
-		know.. personal.
+		Your saved nicknames are shown below.
 	</p>
 
 	<NuxtLink class="group flex flex-row gap-2 items-center" to="/">
@@ -17,8 +16,8 @@
 			<template v-if="discordStatus === 'pending' || discordStatus === 'error'">
 				<div class="flex flex-row justify-between items-center mt-2">
 					<div class="flex flex-row items-center gap-2">
-						<img :src="`https://cdn.di
-						scordapp.com/embed/avatars/5.png`" alt="" class="rounded-full w-16 h-16">
+						<img :src="`https://cdn.discordapp.com/embed/avatars/5.png`" alt=""
+							class="rounded-full w-16 h-16">
 						<div>
 							<p class="font-semibold text-lg">Madeline Celeste</p>
 							<p class="text-subtext0 font-medium text-sm">@mountceleste</p>

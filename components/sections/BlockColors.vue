@@ -1,16 +1,18 @@
 <template>
-	<block>
-		<div class="flex flex-row justify-between">
-			<h2 class="text-md font-medium text-subtext1">Colors</h2>
+	<block title="Colors">
+		<template #button>
 			<IconButton text="Add your own?" icon-name="material-symbols:add-circle-outline-rounded"
 				@click="useUpdateModal(true, 'BlockColors')" />
-		</div>
+		</template>
+
 		<div class="grid grid-cols-2 md:grid-cols-6">
 			<button v-for="color in blockMCColors" :key="color.colorName"
 				:style="`background-color: ${color.backgroundColor}; color: ${color.textColor}`"
 				class="m-2 rounded-md p-2" @click.prevent="() => declareColorFunc(color)">
-				<p class="font-semibold">{{ color.colorName }}</p>
-				<p>&{{ color.hexId }}</p>
+				<flex class="flex-row lg:flex-col items-center">
+					<p class="font-semibold">{{ color.colorName }}</p>
+					<p>&{{ color.hexId }}</p>
+				</flex>
 			</button>
 		</div>
 	</block>

@@ -14,15 +14,14 @@
 		</div>
 
 		<template v-for="(gradient, index) in colors" :key="index">
-			<div
-				class="my-2 flex flex-col justify-between gap-2 rounded-lg p-2 bg-base md:flex-row md:items-center md:gap-0">
+			<div class="my-2 flex flex-row items-center justify-between rounded-lg p-2 bg-base">
 				<div class="flex flex-row items-center gap-2">
 					<div class="h-8 w-8 rounded-full" :style="`background: ${gradient}`"></div>
 					<p>
 						{{ gradient }}
 					</p>
 				</div>
-				<div class="flex flex-row items-center justify-between gap-2 md:justify-end">
+				<div class="flex flex-row items-center justify-between gap-3 md:gap-2 md:justify-end">
 					<button class="group" @click="() => moveItem(colors, index, index - 1)" :disabled="index === 0">
 						<icon name="material-symbols:arrow-upward-rounded"
 							class="text-subtext0 transition-all duration-500" size="28" :class="index === 0
