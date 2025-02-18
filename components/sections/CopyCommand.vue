@@ -1,5 +1,5 @@
 <template>
-	<block slot="Command">
+	<block title="Command">
 		<template #button>
 			<IconButton :text="justCopied ? `Copied!` : `Copy Command`"
 				icon-name="material-symbols:content-copy-outline-rounded" @click="copyCommand" />

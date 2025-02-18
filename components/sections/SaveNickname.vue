@@ -34,6 +34,7 @@
 <script setup lang="ts">
 const nick = useNick();
 const saveNicknameButtonState = useState("saveNicknameButtonState", () => { return { text: "Save Nickname", icon: "material-symbols:save-outline-rounded" } });
+const isFirstSavePostLoad = useState("isFirstSavePostLoad", () => { return true; });
 const { loggedIn } = useUserSession();
 const buttonClass = "group mt-2 flex flex-row gap-1 bg-base hover:bg-surface0 w-1/2 p-2 rounded-md h-fill md:mt-0 md:bg-transparent md:hover:bg-transparent md:w-fit md:p-0 md:rounded-none";
 
@@ -59,12 +60,14 @@ const saveNickname = () => {
 		};
 	}
 
-	if (error) {
+	if (error && !isFirstSavePostLoad.value) {
 		console.error(error.value ?? "Bingle has fallen.");
 		saveNicknameButtonState.value = {
 			text: "Something happened!",
 			icon: "material-symbols:error-outline-rounded"
 		};
+
+		isFirstSavePostLoad.value = false;
 
 		setTimeout(() => {
 			saveNicknameButtonState.value = {
@@ -74,7 +77,7 @@ const saveNickname = () => {
 		}, 2500);
 	}
 
-	if (data && data.value) {
+	if ((data && data.value) ?? isFirstSavePostLoad.value) {
 		saveNicknameButtonState.value = {
 			text: "Saved!",
 			icon: "material-symbols:check-circle-outline-rounded"

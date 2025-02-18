@@ -14,7 +14,7 @@
 					<p>&{{ color.hexId }}</p>
 				</flex>
 			</button>
-		</div>
+		</div>	
 	</block>
 
 	<ModalsColorPick @color-update="updateColor" />
